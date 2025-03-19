@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Training</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+
+    <div class="body-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Phishing Tool</h2>
+            <div class="sidebar-menu">
+                <p>MENU</p>
+                <a href="#" id="dashboard">Dashboard</a>
+                <a href="#">Reports</a>
+                <a href="#">Quizes</a>
+                <a href="#">Student Review</a>
+            </div>
+
+            <div class="sidebar-others">
+                <p>OTHERS</p>
+                <a href="#">Settings</a>
+                <a href="#">Profile</a>
+                <a href="#">Help</a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Navbar -->
+            <div class="navbar">
+                <h2>Navbar</h2>
+            </div>
+
+            <!-- Page Content -->
+            <div class="container">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

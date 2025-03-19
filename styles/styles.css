@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Schoolbell&display=swap');
+/* Reset margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Base.html */
+.body-container {
+    display: flex;
+    height: 100vh;
+}
+
+    /* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #F1F2F7;
+    color: #082431;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    font-size: .9rem;
+}
+
+.sidebar a {
+    color: #273240;
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+}
+
+.sidebar a:hover {
+    background-color: #E4E6F4;
+    color: #707FDD;
+    border-radius: 1cap;
+}
+
+.sidebar p {
+    padding-bottom: 5%;
+}
+
+.sidebar #dashboard {
+    font-weight: 500;
+}
+
+.sidebar-menu {
+    padding-top: 130%;
+    padding-bottom: 20%;
+
+}
+
+    /* Main Content */
+.container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+    padding-left: 5%;
+}
+
+    /* Navbar */
+.navbar {
+    background-color: white;
+    color: #1F384C;
+    padding: 15px;
+    text-align: center;
+}
+
+    /* Content Section */
+.content {
+    flex-grow: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Quiz.html */
+.quiz-phishing-sim{
+    width: 100%;
+    height: 500px;
+    border: 2px solid;
+    border-color: #082431;
+    padding: 10px;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+.quiz-question{
+    padding-top: 10%;
+}
+
+.quiz-question p{
+    padding-bottom: 0.6%;
+}
+
+.quiz-question input{
+    padding-bottom: 0.6%;
+}
