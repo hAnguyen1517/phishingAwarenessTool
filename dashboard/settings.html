@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div class="settings-container">
+    <h2>Settings</h2>
+    <p>Update your preferences below.</p>
+
+    <form class="settings-form">
+        <!-- Theme Selection -->
+        <label for="theme">Theme:</label>
+        <select id="theme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+        </select>
+
+        <!-- Quiz Difficulty -->
+        <label for="difficulty">Quiz Difficulty:</label>
+        <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+
+        <!-- Sharing Options -->
+        <label>Sharing Options:</label>
+        <div class="checkbox-group">
+            <label for="share-score">Share my quiz scores</label>
+            <input type="checkbox" id="share-score">
+        </div>
+        <div class="checkbox-group">
+            <label for="share-progress">Share my learning progress</label>
+            <input type="checkbox" id="share-progress">
+        </div>
+
+        <!-- Feedback -->
+        <label for="feedback">Feedback:</label>
+        <textarea id="feedback" rows="4" placeholder="Write your feedback here..."></textarea>
+
+        <button type="submit">Save Changes</button>
+    </form>
+</div>
+
+{% endblock %}

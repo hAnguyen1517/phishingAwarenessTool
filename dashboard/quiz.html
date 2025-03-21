@@ -3,11 +3,30 @@
 {% load static %}
 <div class="quiz-container">
     <div class="quiz-phishing-sim">
-
+        {% include "quiz_sim_1.html" %}
     </div>
     <form>
         <div class="quiz-question">
-            <p>3. Which type of phishing attack involves scammers pretending to be a CEO or high-ranking official?</p>
+            <p>1. You receive a text message claiming you've won a free iPhone, but you must click a link to claim it. What should you do?</p>
+            <label>
+                <input type="radio" name="answer" value="male"> Click the link and enter your details
+            </label>
+            <br >
+            <label>
+                <input type="radio" name="answer" value="female"> Ignore and delete the message
+            </label>
+            <br >
+            <label>
+                <input type="radio" name="answer" value="other"> Forward it to your contacts
+            </label>
+            <br >
+            <label>
+                <input type="radio" name="answer" value="other"> Reply and ask for more details
+            </label>
+        </div>
+
+        <div class="quiz-question">
+            <p>2. Which type of phishing attack involves scammers pretending to be a CEO or high-ranking official?</p>
             <label>
                 <input type="radio" name="answer" value="male"> Clone Phishing
             </label>
@@ -22,6 +41,25 @@
             <br >
             <label>
                 <input type="radio" name="answer" value="other"> Vishing
+            </label>
+        </div>
+
+        <div class="quiz-question">
+            <p>3. Which of these is a safe practice when dealing with emails?</p>
+            <label>
+                <input type="radio" name="answer" value="male"> Clicking on email links immediately
+            </label>
+            <br >
+            <label>
+                <input type="radio" name="answer" value="female"> Manually typing the website URL into your browser
+            </label>
+            <br >
+            <label>
+                <input type="radio" name="answer" value="other"> Downloading attachments from unknown senders
+            </label>
+            <br >
+            <label>
+                <input type="radio" name="answer" value="other"> Ignoring emails from your IT department
             </label>
         </div>
 
@@ -61,6 +99,12 @@
             <label>
                 <input type="radio" name="answer" value="other"> Ignoring emails from your IT department
             </label>
+        </div>
+
+
+        <div class="next-prev-buttons">
+            <a href="#">Previous</a>
+            <a href="#">Next</a>
         </div>
     </form>
 </div>
