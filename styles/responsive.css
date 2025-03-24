@@ -1,0 +1,1116 @@
+@media (max-width: 768px) {
+    /* landing page */
+    .header {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .logo .icon {
+        width: 25px;
+        height: 25px;
+        font-size: var(--font-size-md);
+    }
+
+    .hero {
+        padding: var(--spacing-md) 0;
+    }
+
+    .hero-content h1 {
+        font-size: var(--font-size-md);
+    }
+
+    .hero-content p {
+        font-size: var(--font-size-xs);
+    }
+
+    .btn-group {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .cta-btn, .secondary-btn {
+        width: 100%;
+    }
+
+    .features, .benefits, .testimonials {
+        padding: var(--spacing-md) 0;
+    }
+
+    .feature-card, .benefit-card, .testimonial-card {
+        padding: var(--spacing-sm);
+    }
+
+    /* signup page */
+    .signup-card {
+        padding: var(--spacing-sm);
+    }
+
+    .logo .icon {
+        width: 25px;
+        height: 25px;
+        font-size: var(--font-size-md);
+    }
+
+    .logo {
+        margin-bottom: var(--spacing-md);
+    }
+
+    h2 {
+        font-size: var(--font-size-md);
+    }
+
+    .form-group label {
+        font-size: var(--font-size-sm);
+    }
+
+    .form-group input {
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+
+    .signup-btn {
+        padding: var(--spacing-sm);
+        font-size: var(--font-size-sm);
+    }
+
+    /* signin page */
+    .signin-card {
+        padding: var(--spacing-sm);
+    }
+
+    .logo .icon {
+        width: 25px;
+        height: 25px;
+        font-size: var(--font-size-md);
+    }
+
+    .logo {
+        margin-bottom: var(--spacing-md);
+    }
+
+    h2 {
+        font-size: var(--font-size-md);
+    }
+
+    .form-group label {
+        font-size: var(--font-size-sm);
+    }
+
+    .form-group input {
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+
+    .signin-btn {
+        padding: var(--spacing-sm);
+        font-size: var(--font-size-sm);
+    }
+
+    /* dashboard page */
+
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: -250px; /* Start off-screen */
+        padding: var(--spacing-md) 0;
+        transition: left 0.3s ease;
+        z-index: 1000;
+    }
+
+    .sidebar.active {
+        left: 0; /* Slide in */
+    }
+
+    .sidebar-content {
+        position: relative;
+    }
+
+    .close-btn {
+        display: block;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .main-content {
+        margin-left: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .main-content.dimmed {
+        opacity: 0.3; /* Dim the content when sidebar is open */
+    }
+
+    .container {
+        padding: var(--spacing-sm);
+    }
+
+    .landing-container {
+        padding: var(--spacing-sm);
+    }
+
+    .btn-group {
+        flex-direction: column;
+    }
+
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-sm) 0;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: var(--font-size-lg);
+    }
+
+    .user-info {
+        margin-top: 0;
+        font-size: var(--font-size-sm);
+    }
+
+    .content {
+        grid-template-columns: 1fr;
+    }
+
+    .charts {
+        flex-direction: column;
+    }
+
+    .overlay {
+        display: none;
+    }
+
+    .sidebar.active ~ .overlay {
+        display: block;
+    }
+
+    .close-btn {
+        display: block;
+    }
+
+    .video-placeholder {
+        height: 250px; /* Further reduce for smaller screens */
+    }
+
+    .video-section, .more-about-us {
+        padding: var(--spacing-sm);
+    }
+
+    .more-about-us p {
+        font-size: var(--font-size-sm);
+        line-height: 1.4;
+    }
+
+    .quiz-section {
+        padding: var(--spacing-sm);
+    }
+
+    .quiz-nav {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .nav-link {
+        padding: var(--spacing-sm);
+        text-align: center;
+    }
+
+    .question {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .options li {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: var(--spacing-sm);
+    }
+
+    .options input[type="radio"] {
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .quiz-footer {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .nav-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-btn.next {
+        order: -1; /* Move "Next" button to the top */
+    }
+
+    /* report page */
+    .report-nav {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .nav-link {
+        padding: var(--spacing-sm);
+        text-align: center;
+    }
+
+    .report-section {
+        padding: var(--spacing-sm);
+    }
+
+    .report-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: var(--spacing-sm);
+        text-align: left;
+    }
+
+    .view-report {
+        margin-top: var(--spacing-sm);
+    }
+
+    /* profile page */
+    .profile-section, .stats-card {
+        padding: var(--spacing-sm);
+    }
+
+    .image-placeholder {
+        width: 60px;
+        height: 60px;
+    }
+
+    .form-group label {
+        font-size: var(--font-size-sm);
+    }
+
+    .form-group input {
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+
+    .update-btn {
+        padding: var(--spacing-sm);
+        font-size: var(--font-size-sm);
+    }
+
+    .stats-card h3 {
+        font-size: var(--font-size-md);
+    }
+
+    .chart-placeholder {
+        height: 100px;
+    }
+
+    .bubble-chart {
+        height: 140px;
+    }
+
+    /* settings page */
+    .settings-section {
+        padding: var(--spacing-sm);
+    }
+
+    .settings-section h2 {
+        font-size: var(--font-size-md);
+    }
+
+    .settings-item label {
+        font-size: var(--font-size-sm);
+    }
+
+    .settings-item .description {
+        font-size: var(--font-size-xs);
+    }
+
+    .settings-item select {
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+
+    .save-btn {
+        width: 100%;
+        padding: var(--spacing-sm);
+        font-size: var(--font-size-sm);
+    }
+
+    /* help page */
+    .help-section {
+        padding: var(--spacing-sm);
+    }
+
+    .help-section h2 {
+        font-size: var(--font-size-md);
+    }
+
+    .faq-item summary,
+    .faq-item p,
+    .form-group label {
+        font-size: var(--font-size-sm);
+    }
+
+    .search-input,
+    .form-group input,
+    .form-group textarea {
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+
+    .search-btn,
+    .submit-btn {
+        padding: var(--spacing-sm);
+        font-size: var(--font-size-sm);
+    }
+
+    .submit-btn {
+        width: 100%;
+        align-self: stretch;
+    }
+}
+
+@media (max-width: 600px) {
+    /* landing page */
+    .header {
+        flex-direction: column;
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+
+    .logo {
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .hero-content h1 {
+        font-size: var(--font-size-sm);
+    }
+
+    .feature-card h3, .benefit-card h3 {
+        font-size: var(--font-size-sm);
+    }
+
+    .testimonial-card p {
+        font-size: var(--font-size-xs);
+    }
+
+    .footer {
+        padding: var(--spacing-xs);
+    }
+
+    .footer-links a {
+        display: block;
+        margin: var(--spacing-xs) 0;
+    }
+
+    /* signup page */
+    .signup-card {
+        padding: var(--spacing-xs);
+    }
+
+    .logo .icon {
+        width: 20px;
+        height: 20px;
+        font-size: var(--font-size-sm);
+    }
+
+    h2 {
+        font-size: var(--font-size-sm);
+    }
+
+    .form-group label {
+        font-size: var(--font-size-xs);
+    }
+
+    .form-group input {
+        padding: var(--spacing-xs);
+        font-size: var(--font-size-xs);
+    }
+
+    .signup-btn {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-xs);
+    }
+
+    /* signin page */
+    .signin-card {
+        padding: var(--spacing-xs);
+    }
+
+    .logo .icon {
+        width: 20px;
+        height: 20px;
+        font-size: var(--font-size-sm);
+    }
+
+    h2 {
+        font-size: var(--font-size-sm);
+    }
+
+    .form-group label {
+        font-size: var(--font-size-xs);
+    }
+
+    .form-group input {
+        padding: var(--spacing-xs);
+        font-size: var(--font-size-xs);
+    }
+
+    .signin-btn {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-xs);
+    }
+
+    /* dashboard page */
+
+    .stats-card, .card, .chart-card {
+        padding: var(--spacing-sm);
+    }
+
+    .stats-value {
+        font-size: 20px;
+    }
+
+    .view-report, .card button {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: var(--font-size-sm);
+    }
+
+    .chart-placeholder {
+        height: 120px;
+    }
+
+    .bubble-chart {
+        height: 160px;
+    }
+
+    .question-list li img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .video-placeholder {
+        height: 200px; /* Smaller height for phones */
+    }
+
+    .video-section h2, .more-about-us h2 {
+        font-size: var(--font-size-md);
+    }
+
+    .more-about-us p {
+        font-size: var(--font-size-xs);
+    }
+
+    .play-icon {
+        font-size: 40px; /* Reduce play icon size */
+    }
+
+    .question h3 {
+        font-size: var(--font-size-sm);
+    }
+
+    .options label {
+        font-size: var(--font-size-xs);
+    }
+
+    .nav-link {
+        font-size: var(--font-size-xs);
+    }
+
+    .nav-btn {
+        font-size: var(--font-size-xs);
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+
+    /* report page */
+    .report-section h2 {
+        font-size: var(--font-size-md);
+    }
+
+    .report-item span, .view-report {
+        font-size: var(--font-size-xs);
+    }
+
+    .nav-link {
+        font-size: var(--font-size-xs);
+    }
+
+    /* profile page */
+    .profile-section, .stats-card {
+        padding: var(--spacing-xs);
+    }
+
+    .image-placeholder {
+        width: 50px;
+        height: 50px;
+    }
+
+    .form-group label {
+        font-size: var(--font-size-xs);
+    }
+
+    .form-group input {
+        padding: var(--spacing-xs);
+        font-size: var(--font-size-xs);
+    }
+
+    .update-btn {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-xs);
+    }
+
+    .stats-value {
+        font-size: 20px;
+    }
+
+    .stats-card p {
+        font-size: var(--font-size-xs);
+    }
+
+    .chart-placeholder {
+        height: 80px;
+    }
+
+    .bubble-chart {
+        height: 120px;
+    }
+
+    .view-report {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-xs);
+    }
+
+    /* settings page */
+    .settings-section {
+        padding: var(--spacing-xs);
+    }
+
+    .settings-section h2 {
+        font-size: var(--font-size-sm);
+    }
+
+    .settings-item {
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .settings-item label {
+        font-size: var(--font-size-xs);
+    }
+
+    .settings-item select {
+        font-size: var(--font-size-xs);
+    }
+
+    .save-btn {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-xs);
+    }
+
+    /* help page */
+    .help-section {
+        padding: var(--spacing-xs);
+    }
+
+    .help-section h2 {
+        font-size: var(--font-size-sm);
+    }
+
+    .faq-item {
+        margin-bottom: var(--spacing-sm);
+    }
+
+    .faq-item summary,
+    .faq-item p,
+    .form-group label {
+        font-size: var(--font-size-xs);
+    }
+
+    .search-btn,
+    .submit-btn {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-xs);
+    }
+}
+
+@media (max-width: 1024px) {
+    /* landing page */
+    .header {
+        padding: var(--spacing-md) var(--spacing-lg);
+    }
+
+    .nav {
+        display: none; /* Hide navigation on smaller screens */
+    }
+
+    .hero-content h1 {
+        font-size: var(--font-size-lg);
+    }
+
+    .hero-content p {
+        font-size: var(--font-size-sm);
+    }
+
+    .feature-grid, .benefit-grid, .testimonial-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-btn, .secondary-btn {
+        padding: var(--spacing-sm);
+    }
+
+    /* signup page */
+    .signup-container {
+        padding: var(--spacing-sm);
+    }
+
+    .signup-card {
+        padding: var(--spacing-md);
+    }
+
+    .form-group input {
+        padding: var(--spacing-sm);
+    }
+
+    .signup-btn {
+        padding: var(--spacing-sm);
+    }
+
+    /* signin page */
+    .signin-container {
+        padding: var(--spacing-sm);
+    }
+
+    .signin-card {
+        padding: var(--spacing-md);
+    }
+
+    .form-group input {
+        padding: var(--spacing-sm);
+    }
+
+    .signin-btn {
+        padding: var(--spacing-sm);
+    }
+
+    /* dashboard page */
+
+    .stats {
+        flex-direction: column;
+    }
+
+    .stats-card {
+        margin-right: 0;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .stats-card:last-child {
+        margin-bottom: 0;
+    }
+
+    .charts {
+        flex-direction: column;
+    }
+
+    .chart-card {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .training-content {
+        padding: var(--spacing-sm);
+    }
+
+    .video-placeholder {
+        height: 300px; /* Reduce video height for tablets */
+    }
+
+    .more-about-us {
+        padding: var(--spacing-md);
+    }
+
+    .quiz-content {
+        padding: var(--spacing-sm);
+    }
+
+    .quiz-section {
+        padding: var(--spacing-md);
+    }
+
+    .question h3 {
+        font-size: var(--font-size-md);
+    }
+
+    .options li {
+        padding: var(--spacing-sm);
+    }
+
+    /* report page */
+    .report-content {
+        padding: var(--spacing-sm);
+    }
+
+    .report-section {
+        padding: var(--spacing-md);
+    }
+
+    .report-item {
+        padding: var(--spacing-sm);
+    }
+
+    /* profile page */
+    .profile-content {
+        padding: var(--spacing-sm);
+        flex-direction: column;
+    }
+
+    .profile-section, .stats-card {
+        padding: var(--spacing-md);
+    }
+
+    .image-placeholder {
+        width: 80px;
+        height: 80px;
+    }
+
+    .form-group input {
+        padding: var(--spacing-sm);
+    }
+
+    .chart-placeholder {
+        height: 120px;
+    }
+
+    .bubble-chart {
+        height: 160px;
+    }
+
+    /* settings page */
+    .settings-content {
+        padding: var(--spacing-sm);
+    }
+
+    .settings-section {
+        padding: var(--spacing-md);
+    }
+
+    .settings-item select {
+        width: 100%;
+    }
+
+    .save-btn {
+        padding: var(--spacing-sm);
+    }
+
+    /* help page */
+    .help-content {
+        padding: var(--spacing-sm);
+    }
+
+    .help-section {
+        padding: var(--spacing-md);
+    }
+
+    .search-form {
+        flex-direction: column;
+    }
+
+    .search-btn {
+        width: 100%;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: var(--spacing-sm);
+    }
+}
+
+@media (max-width: 480px) {
+    /* landing page */
+    .hero-content h1 {
+        font-size: 18px;
+    }
+
+    .hero-content p {
+        font-size: 10px;
+    }
+
+    .feature-card, .benefit-card, .testimonial-card {
+        padding: var(--spacing-xs);
+    }
+
+    .feature-card h3, .benefit-card h3 {
+        font-size: var(--font-size-xs);
+    }
+
+    .testimonial-card .author {
+        font-size: 8px;
+    }
+
+    .cta-btn, .secondary-btn {
+        padding: var(--spacing-xs);
+        font-size: var(--font-size-xs);
+    }
+
+    .footer p {
+        font-size: var(--font-size-xs);
+    }
+    
+    /* signup page */
+    .signup-container {
+        padding: var(--spacing-xs);
+    }
+
+    .signup-card {
+        padding: var(--spacing-xs);
+    }
+
+    .logo {
+        margin-bottom: var(--spacing-sm);
+    }
+
+    h2 {
+        font-size: 14px;
+    }
+
+    .form-group label {
+        font-size: 10px;
+    }
+
+    .form-group input {
+        padding: var(--spacing-xs);
+        font-size: 10px;
+    }
+
+    .signup-btn {
+        padding: var(--spacing-xs);
+        font-size: 10px;
+    }
+
+    /* signin page */
+    .signin-container {
+        padding: var(--spacing-xs);
+    }
+
+    .signin-card {
+        padding: var(--spacing-xs);
+    }
+
+    .logo {
+        margin-bottom: var(--spacing-sm);
+    }
+
+    h2 {
+        font-size: 14px;
+    }
+
+    .form-group label {
+        font-size: 10px;
+    }
+
+    .form-group input {
+        padding: var(--spacing-xs);
+        font-size: 10px;
+    }
+
+    .signin-btn {
+        padding: var(--spacing-xs);
+        font-size: 10px;
+    }
+
+    /* dashboard page */
+    header h1 {
+        font-size: var(--font-size-md); /* Adjusted for smaller screens */
+    }
+
+    .stats-card, .card, .chart-card {
+        padding: var(--spacing-xs); /* Smaller padding for tiny screens */
+    }
+
+    .stats-value {
+        font-size: 18px;
+    }
+
+    .chart-placeholder {
+        height: 100px;
+    }
+
+    .bubble-chart {
+        height: 140px;
+    }
+
+    .question-list li img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .video-placeholder {
+        height: 150px; /* Minimum height for very small screens */
+    }
+
+    .video-section, .more-about-us {
+        padding: var(--spacing-xs);
+    }
+
+    .more-about-us p {
+        font-size: 12px; /* Smaller text for tiny screens */
+        line-height: 1.3;
+    }
+
+    .play-icon {
+        font-size: 30px; /* Further reduce play icon */
+    }
+
+    .quiz-section {
+        padding: var(--spacing-xs);
+    }
+
+    .quiz-nav {
+        gap: var(--spacing-xs);
+    }
+
+    .question h TRAVERSAL3 {
+        font-size: 14px;
+    }
+
+    .options li {
+        padding: var(--spacing-xs);
+    }
+
+    .options input[type="radio"] {
+        margin-right: var(--spacing-sm);
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .nav-btn {
+        padding: var(--spacing-xs);
+    }
+
+    /* report page */
+    .report-section {
+        padding: var(--spacing-xs);
+    }
+
+    .report-item {
+        padding: var(--spacing-xs);
+    }
+
+    .report-item span, .view-report {
+        font-size: 12px;
+    }
+
+    /* profile page */
+    .profile-content {
+        padding: var(--spacing-xs);
+    }
+
+    .profile-section, .stats-card {
+        padding: var(--spacing-xs);
+    }
+
+    .image-placeholder {
+        width: 40px;
+        height: 40px;
+    }
+
+    .form-group {
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .update-btn {
+        padding: var(--spacing-xs);
+        font-size: 10px;
+    }
+
+    .stats-card h3 {
+        font-size: var(--font-size-sm);
+    }
+
+    .chart-placeholder {
+        height: 60px;
+    }
+
+    .bubble-chart {
+        height: 100px;
+    }
+
+    .view-report {
+        padding: var(--spacing-xs);
+        font-size: 10px;
+    }
+
+    /* settings page */
+    .settings-content {
+        padding: var(--spacing-xs);
+    }
+
+    .settings-section {
+        padding: var(--spacing-xs);
+    }
+
+    .settings-item .description {
+        font-size: 10px;
+    }
+
+    .settings-item select {
+        padding: var(--spacing-xs);
+        font-size: 10px;
+    }
+
+    .save-btn {
+        padding: var(--spacing-xs);
+        font-size: 10px;
+    }
+
+    /* help page */
+    .help-content {
+        padding: var(--spacing-xs);
+    }
+
+    .help-section {
+        padding: var(--spacing-xs);
+    }
+
+    .faq-item p {
+        padding: var(--spacing-xs);
+        font-size: 10px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: var(--spacing-xs);
+        font-size: 10px;
+    }
+
+    .search-btn,
+    .submit-btn {
+        padding: var(--spacing-xs);
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 320px) {
+    .stats h3, .card h3 {
+        font-size: var(--font-size-sm);
+    }
+
+    .stats-date, .report-count {
+        font-size: var(--font-size-xs);
+    }
+
+    .view-report, .card button {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-xs);
+    }
+}
+
+/* Hamburger and Close Button */
+.close-btn {
+    display: none;
+    font-size: var(--font-size-lg);
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    z-index: 1001;
+}
+
+
+

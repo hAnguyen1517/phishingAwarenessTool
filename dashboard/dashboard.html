@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Phishing Training</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="../styles/responsive.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-content">
+            <div class="sidebar-header">
+                <span class="icon">PT</span> Phishing Tool
+                <button class="close-btn">×</button>
+            </div>
+            <div class="sidebar-menu">
+                <h4>MENU</h4>
+                <ul>
+                    <li><a href="dashboard.html" class="active"><span class="icon">🏠</span> Dashboard</a></li>
+                    <li><a href="training.html"><span class="icon">📚</span> Training</a></li>
+                    <li><a href="quiz.html"><span class="icon">❓</span> Quiz</a></li>
+                    <li><a href="report.html"><span class="icon">📊</span> Reports</a></li>
+                </ul>
+                <h4>OTHERS</h4>
+                <ul>
+                    <li><a href="settings.html"><span class="icon">⚙️</span> Settings</a></li>
+                    <li><a href="profile.html"><span class="icon">👤</span> Profile</a></li>
+                    <li><a href="help.html"><span class="icon">❓</span> Help</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <button class="hamburger">☰</button>
+            <h1>Dashboard</h1>
+            <div class="user-info">
+                Hi, User <span>▼</span>
+                <div class="dropdown">
+                    <a href="profile.html">Profile</a>
+                    <a href="#">Logout</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="stats">
+                <div class="stats-card">
+                    <h3>SRate</h3>
+                    <p class="stats-value">7.85%</p>
+                    <p class="stats-change">↑ 2.1% vs last week</p>
+                    <p class="stats-date">Reports from 1-12 Dec, 2024</p>
+                    <div class="chart-placeholder bar-chart">Bar Chart Placeholder</div>
+                    <button class="view-report">View Report</button>
+                </div>
+                <div class="stats-card">
+                    <h3>Total Reports</h3>
+                    <p class="stats-date">From 1-30 February, 2025</p>
+                    <div class="chart-placeholder donut-chart">Donut Chart Placeholder</div>
+                    <div class="chart-legend">
+                        <span>Students <span class="legend-color" style="background-color: #4B5EAA;"></span> 40%</span>
+                        <span>Trainers <span class="legend-color" style="background-color: #6A7DD3;"></span> 32%</span>
+                        <span>Staff <span class="legend-color" style="background-color: #A9B6F0;"></span> 28%</span>
+                    </div>
+                    <button class="view-report">View Report</button>
+                    <div class="report-count">1,080 Reports</div>
+                </div>
+            </div>
+
+            <div class="content">
+                <div class="charts">
+                    <div class="chart-card">
+                        <h3>Your Rating</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                        <div class="chart-placeholder bubble-chart">Bubble Chart Placeholder</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Most Asked Questions</h3>
+                    <ul class="question-list">
+                        <li><img src="https://via.placeholder.com/30" alt="User"> Most common question that most students fail</li>
+                        <li><img src="https://via.placeholder.com/30" alt="User"> Most common sign of a phishing email</li>
+                        <li><img src="https://via.placeholder.com/30" alt="User"> Things to check before clicking a link</li>
+                        <li><img src="https://via.placeholder.com/30" alt="User"> Security feature to prevent phishing</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Your Reports</h3>
+                    <p class="stats-value">2.568</p>
+                    <p class="stats-change">↓ 2.1% vs last week</p>
+                    <p class="stats-date">From 1-30 Jan, 2025</p>
+                    <div class="chart-placeholder line-chart">Line Chart Placeholder</div>
+                    <button class="view-report">View Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/main.js"></script>
+</body>
+</html>
