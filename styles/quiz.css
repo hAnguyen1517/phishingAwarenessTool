@@ -1,0 +1,74 @@
+/* Quiz.html */
+.quiz-phishing-sim{
+    width: 100%;
+    max-width: 1200px;
+    height: 500px;
+    border: 2px solid;
+    border-color: #DDE4F0;
+    margin:auto;
+    padding: 10px;
+    border-radius: 12px;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.quiz-question{
+    padding-top: 75px;
+    align-items: center;
+    gap: 10px;
+}
+
+.quiz-question p{
+    margin: 0; /* Removes default margin */
+    padding-bottom: 0; /* Removes bottom padding to align better */
+    padding-bottom: 10px;
+}
+
+.quiz-question input{
+    margin-right: 5px;
+    vertical-align: middle;
+    padding-bottom: 10px;
+}
+
+input[type="radio"] {
+    appearance: none; /* Removes default styles */
+    width: 20px;
+    height: 20px;
+    border: 2px solid #AAA; 
+    background-color: #CCC;
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle; 
+}
+
+input[type="radio"]:checked {
+    background-color: #707FDD; 
+    border-color: #0056b3;
+}
+
+.next-prev-buttons{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+.next-prev-buttons a {
+    background-color: #FBFCFE;
+    color: #5A6ACF;
+    border: solid;
+    border-color: #DDE4F0;
+    border-width: 2px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    width: 150px;  /* Fixed width for uniform shape */
+    border-radius: .5rem; /* No rounded corners (rectangular) */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.next-prev-buttons a:hover {
+    background-color: #E1E2E4;
+}
+
