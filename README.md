@@ -70,25 +70,25 @@ phishing-training-platform/
 ├── dashboard
 │   ├── dashboard.html (done)
 │   ├── profile.html
-│   ├── quiz.html
+│   ├── quiz.html (done)
 │   ├── report.html
-│   ├── settings.html
+│   ├── settings.html (done)
 │   ├── template.html (done)
-│   └── training.html
+│   └── training.html (done)
 ├── scripts
 │   └── main.js
 ├── styles
 │   ├── dashboard.css (done)
 │   ├── index.css
-│   ├── profile.css
-│   ├── quiz.css
-│   ├── report.css
+│   ├── profile.css 
+│   ├── quiz.css 
+│   ├── report.css 
 │   ├── responsive.css (the root styles for responsive) *don't edit
-│   ├── settings.css
+│   ├── settings.css 
 │   ├── signin.css (done)
 │   ├── signup.css (done)
 │   ├── styles.css (the root styles) *don't edit
-│   └── training.css
+│   └── training.css (done)
 ├── README.md
 ├── index.html (done)
 ├── signin.html (done)
