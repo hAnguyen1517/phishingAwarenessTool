@@ -1,0 +1,73 @@
+/* profile.css */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-lg);
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    margin-top: var(--spacing-md);
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.profile-header h2 {
+    font-size: var(--font-size-xl);
+    color: var(--text-primary);
+}
+
+.profile-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    width: 100%;
+}
+
+.profile-info div {
+    background-color: var(--light-gray);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+}
+
+.profile-info div h3 {
+    font-size: var(--font-size-lg);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.edit-profile {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--accent-purple);
+    color: var(--white);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.edit-profile:hover {
+    background-color: #5a3fc2;
+}
+
+.view-report {
+    background-color: var(--accent-purple);
+    color: var(--white);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius);
+    width: 30%;
+    margin-top: var(--spacing-md);
+}
+
+.view-report:hover {
+    background-color: #5a3fc2; /* Darker shade of accent-purple */
+}

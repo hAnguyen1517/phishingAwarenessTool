@@ -1,0 +1,39 @@
+/* report.css */
+.container {
+    max-width: 1200px;
+    padding: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+.report-section {
+    background-color: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: var(--spacing-md);
+}
+
+.report-section h2 {
+    font-size: var(--font-size-lg);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.report-section p {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.view-report {
+    background-color: var(--accent-purple);
+    color: var(--white);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius);
+    width: 15%;
+    margin-right: var(--spacing-md);
+}
+
+.view-report:hover {
+    background-color: #5a3fc2; /* Darker shade of accent-purple */
+}
