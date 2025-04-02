@@ -1,18 +1,28 @@
 /* report.css */
-.container {
+/* .container {
     max-width: 1200px;
     padding: var(--spacing-md);
     margin-top: var(--spacing-md);
     display: flex;
     align-items: center;
-}
+} */
+
+/* .report-section {
+    background-color: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: var(--spacing-md);
+}  */
 
 .report-section {
     background-color: var(--white);
     padding: var(--spacing-md);
     border-radius: var(--border-radius);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .report-section h2 {
