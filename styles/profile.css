@@ -1,9 +1,72 @@
 /* profile.css */
-.profile-container {
+
+/* 
+We need to style the profile-card, profile-image (eol 51) that you defined in the profile.html
+*/
+.profile-card {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: var(--spacing-lg);
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
+
+}
+
+.profile-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--accent-purple);
+}
+
+/* I modified the profile-container to look correct */
+
+/* .profile-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-md);
     margin-top: var(--spacing-md);
+} */
+
+.profile-container {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Handles h3 in in line 88 (profile.html) */
+.profile-container h3 {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+}
+
+/* Handles any forms inside profile-contianer class (lines 55-63, 67-75) in profile.html */
+.profile-container form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+/* Handles labels inside any forms that appear inside profile-container in profile.html */
+.profile-container label {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-bold);
+} 
+
+/* Handles inputs inside any forms that appear inside profile-container in profile.html */
+.profile-container input {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-md);
+    transition: border-color 0.3s ease;
 }
 
 .stats-value {
