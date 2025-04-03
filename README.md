@@ -114,7 +114,7 @@ phishing_training/
 
 1. **Clone the Repository**:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/hAnguyen1517/phishingAwarenessTool.git 
    ```
 
 2. **Create a Virtual Environment** (optional but recommended, and do this outside of the project folder for different OS users convenient)
