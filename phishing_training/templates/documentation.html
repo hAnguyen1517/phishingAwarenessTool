@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Documentation - Phishing Training Platform{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/documentation.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="documentation-content">
+        <h1>Phishing Training Platform Documentation</h1>
+        <p>Last updated: March 12, 2025</p>
+
+        <h2>Overview</h2>
+        <p>The Phishing Training Platform is a web-based application designed to educate and train users in identifying and preventing phishing attacks. This documentation provides detailed information for administrators, regular users, and special accounts (e.g., superusers) to effectively use and manage the system.</p>
+
+        <h2>System Architecture</h2>
+        <p>The platform is built using a client-server architecture with the following components:</p>
+        <ul>
+            <li><strong>Frontend:</strong> HTML, CSS, and JavaScript with a responsive design.</li>
+            <li><strong>Backend:</strong> Django framework, handling user authentication and data processing.</li>
+            <li><strong>Database:</strong> MongoDB for storing user data, training progress, and reports.</li>
+            <li><strong>API:</strong> RESTful API for communication between frontend and backend.</li>
+        </ul>
+        <p><strong>Deployment:</strong> Hosted on AWS with load balancing and SSL encryption for security.</p>
+
+        <h2>User Roles and Access Levels</h2>
+        <div class="role-section">
+            <h3>1. Administrators</h3>
+            <p>Administrators have extensive rights to manage the platform, including:</p>
+            <ul>
+                <li>Create, edit, and delete user accounts.</li>
+                <li>Generate system-wide reports and analytics.</li>
+                <li>Configure training modules and simulations.</li>
+            </ul>
+            <p><strong>Access Instructions:</strong> Log in with admin credentials and navigate to the "Reports" or "Settings" sections.</p>
+        </div>
+        <div class="role-section">
+            <h3>2. Regular Users</h3>
+            <p>Regular users have standard access to:</p>
+            <ul>
+                <li>Access training modules and quizzes.</li>
+                <li>View personal progress and reports.</li>
+                <li>Update their profile information.</li>
+            </ul>
+            <p><strong>Access Instructions:</strong> Sign in with user credentials and explore the "Training" and "Quiz" sections.</p>
+        </div>
+        <div class="role-section">
+            <h3>3. Special Accounts (Superusers)</h3>
+            <p>Superusers or system accounts have advanced privileges, including:</p>
+            <ul>
+                <li>Oversee all user activities and system logs.</li>
+                <li>Perform system maintenance and updates.</li>
+                <li>Reset user accounts or troubleshoot issues.</li>
+            </ul>
+            <p><strong>Access Instructions:</strong> Contact support at <a href="mailto:support@phishingtool.com">support@phishingtool.com</a> for superuser access.</p>
+        </div>
+
+        <h2>Key Features and Usage</h2>
+        <ul>
+            <li><strong>Interactive Simulations:</strong> Users can engage in simulated phishing emails to test their skills.</li>
+            <li><strong>Real-Time Reporting:</strong> Admins and users can access dashboards with performance metrics.</li>
+            <li><strong>Comprehensive Training:</strong> A library of courses is available for all users.</li>
+        </ul>
+
+        <h2>Technical Requirements</h2>
+        <ul>
+            <li><strong>Browser:</strong> Latest versions of Chrome, Firefox, or Edge.</li>
+            <li><strong>Internet:</strong> Stable connection with at least 5 Mbps speed.</li>
+            <li><strong>Device:</strong> Desktop, tablet, or mobile with a minimum screen resolution of 1024x768.</li>
+        </ul>
+
+        <h2>Troubleshooting and Support</h2>
+        <p>For issues, refer to the <a href="{% url 'help' %}">Help Center</a> or contact support at <a href="mailto:support@phishingtool.com">support@phishingtool.com</a>.</p>
+    </section>
+{% endblock %}

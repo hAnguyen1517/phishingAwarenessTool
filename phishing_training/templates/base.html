@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Phishing Training Platform{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <span class="icon">PT</span> Phishing Tool
+        </div>
+        <nav class="nav">
+            <a href="{% url 'index' %}">Home</a>
+            <a href="{% url 'index' %}#features">Features</a>
+            <a href="{% url 'index' %}#benefits">Benefits</a>
+            <a href="{% url 'index' %}#testimonials">Testimonials</a>
+            <a href="{% url 'signin' %}">Sign In</a>
+            <a href="{% url 'signup' %}">Sign Up</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Phishing Training Platform. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="{% url 'privacy' %}">Privacy Policy</a>
+            <a href="{% url 'terms' %}">Terms of Service</a>
+            <a href="{% url 'help' %}">Help</a>
+        </div>
+    </footer>
+
+    {% comment %} <script src="{% static 'js/main.js' %}"></script> {% endcomment %}
+</body>
+</html>

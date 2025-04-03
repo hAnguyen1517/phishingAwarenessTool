@@ -1,0 +1,57 @@
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block title %}Help - Phishing Training{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/help.css' %}">
+{% endblock %}
+
+{% block page_title %}Help{% endblock %}
+
+{% block content %}
+    <div class="help-content">
+        <div class="help-section">
+            <h2>Search for Help</h2>
+            <form class="search-form">
+                <input type="text" placeholder="Search for help topics..." class="search-input">
+                <button type="submit" class="search-btn">Search</button>
+            </form>
+        </div>
+        <div class="help-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <details>
+                    <summary>How do I start a quiz?</summary>
+                    <p>Navigate to the Quiz section from the sidebar, select a quiz, and follow the instructions to begin answering questions.</p>
+                </details>
+            </div>
+            <div class="faq-item">
+                <details>
+                    <summary>How can I view my reports?</summary>
+                    <p>Go to the Reports section in the sidebar, where you can view and download your quiz and training reports.</p>
+                </details>
+            </div>
+            <div class="faq-item">
+                <details>
+                    <summary>How do I update my profile?</summary>
+                    <p>Visit the Profile page from the sidebar, where you can update your full name, email, and password.</p>
+                </details>
+            </div>
+        </div>
+        <div class="help-section">
+            <h2>Contact Support</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" placeholder="Enter your subject">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Enter your message" rows="5"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

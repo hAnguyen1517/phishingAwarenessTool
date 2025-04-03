@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Phishing Training{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-content">
+            <div class="sidebar-header">
+                <span class="icon">PT</span> Phishing Tool
+                <button class="close-btn">×</button>
+            </div>
+            <div class="sidebar-menu">
+                <h4>MENU</h4>
+                <ul>
+                    <li><a href="{% url 'dashboard' %}" class="{% if request.path == '/dashboard/' %}active{% endif %}"><span class="icon">🏠</span> Dashboard</a></li>
+                    <li><a href="{% url 'training' %}" class="{% if request.path == '/dashboard/training/' %}active{% endif %}"><span class="icon">📚</span> Training</a></li>
+                    <li><a href="{% url 'quiz' %}" class="{% if request.path == '/dashboard/quiz/' %}active{% endif %}"><span class="icon">❓</span> Quiz</a></li>
+                    <li><a href="{% url 'report' %}" class="{% if request.path == '/dashboard/report/' %}active{% endif %}"><span class="icon">📊</span> Reports</a></li>
+                </ul>
+                <h4>OTHERS</h4>
+                <ul>
+                    <li><a href="{% url 'settings' %}" class="{% if request.path == '/dashboard/settings/' %}active{% endif %}"><span class="icon">⚙️</span> Settings</a></li>
+                    <li><a href="{% url 'profile' %}" class="{% if request.path == '/dashboard/profile/' %}active{% endif %}"><span class="icon">👤</span> Profile</a></li>
+                    <li><a href="{% url 'dashboard_help' %}" class="{% if request.path == '/dashboard/help/' %}active{% endif %}"><span class="icon">❓</span> Help</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <button class="hamburger">☰</button>
+            <h1>{% block page_title %}{% endblock %}</h1>
+            <div class="user-info">
+                Hi, User <span>▼</span>
+                <div class="dropdown">
+                    <a href="{% url 'profile' %}">Profile</a>
+                    <a href="#">Logout</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

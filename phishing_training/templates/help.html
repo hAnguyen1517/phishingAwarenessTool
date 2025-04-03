@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Help - Phishing Training Platform{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/landing_help.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="help-content">
+        <h1>Help Center</h1>
+        <p>Need assistance? We're here to help you get started with the Phishing Training Platform.</p>
+
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <details>
+                <summary>What is the Phishing Training Platform?</summary>
+                <p>The Phishing Training Platform is a comprehensive tool designed to educate employees on identifying and preventing phishing attacks through interactive simulations, real-time reporting, and training modules.</p>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>How do I sign up for the platform?</summary>
+                <p>Click the "Sign Up" button on the homepage, fill in your email, username, and password, and follow the instructions to create your account.</p>
+            </details>
+        </div>
+        <div class="faq-item">
+            <details>
+                <summary>Is my data secure on the platform?</summary>
+                <p>Yes, we use industry-standard security measures, including encryption and access controls, to protect your data. For more details, see our <a href="{% url 'privacy' %}">Privacy Policy</a>.</p>
+            </details>
+        </div>
+
+        <h2>Contact Us</h2>
+        <p>If you have any questions or need further assistance, please reach out to us:</p>
+        <ul>
+            <li>Email: <a href="mailto:support@phishingtool.com">support@phishingtool.com</a></li>
+            <li>Phone: +1-800-555-1234</li>
+            <li>Hours: Monday - Friday, 9 AM - 5 PM PST</li>
+        </ul>
+    </section>
+{% endblock %}

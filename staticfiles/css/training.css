@@ -1,0 +1,46 @@
+.training-content {
+    max-width: 100%;
+    padding: var(--spacing-md);
+}
+
+.video-section, .more-about-us {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.video-section h2, .more-about-us h2 {
+    font-size: var(--font-size-lg);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.video-section p, .more-about-us p {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.video-placeholder {
+    width: 100%;
+    height: 400px;
+    background-color: #d3d3d3;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.play-icon {
+    font-size: 60px;
+    color: #000000;
+    opacity: 0.8;
+}
+
+.more-about-us {
+    padding: var(--spacing-lg);
+}
