@@ -69,9 +69,9 @@ phishing-training-platform/
 │   └── images
 ├── dashboard
 │   ├── dashboard.html (done)
-│   ├── profile.html (in progress)
+│   ├── profile.html (done)
 │   ├── quiz.html (done)
-│   ├── report.html (in progress)
+│   ├── report.html (done)
 │   ├── settings.html (done)
 │   ├── template.html (done)
 │   └── training.html (done)
@@ -80,9 +80,9 @@ phishing-training-platform/
 ├── styles
 │   ├── dashboard.css (done)
 │   ├── index.css (done)
-│   ├── profile.css (in progress)
+│   ├── profile.css (done)
 │   ├── quiz.css (done)
-│   ├── report.css (in progress)
+│   ├── report.css (done)
 │   ├── responsive.css (the root styles for responsive) *don't edit
 │   ├── settings.css (done)
 │   ├── signin.css (done)
