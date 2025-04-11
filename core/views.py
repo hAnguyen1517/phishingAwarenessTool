@@ -188,29 +188,36 @@ def training(request):
     return render(request, 'dashboard/training.html')
 
 
-# dashboard views
-
-# @login_required
+# Dashboard views (all protected with @login_required)
+# For security and privacy purposes, all user must be logged in to view the dashboard pages
+@login_required
 def dashboard(request):
     return render(request, 'dashboard/dashboard.html')
 
+@login_required
 def training(request):
     return render(request, 'dashboard/training.html')
 
+@login_required
 def quiz(request):
     return render(request, 'dashboard/quiz.html')
 
+@login_required
 def report(request):
     return render(request, 'dashboard/report.html')
 
+@login_required
 def settings(request):
     return render(request, 'dashboard/settings.html')
 
+@login_required
 def profile(request):
     return render(request, 'dashboard/profile.html')
 
+@login_required
 def dashboard_help(request):
     return render(request, 'dashboard/help.html')
 
+@login_required
 def template(request): #don't update this view
     return render(request, 'dashboard/template.html')
