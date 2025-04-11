@@ -140,6 +140,17 @@ def signup(request):
 
     return render(request, 'signup.html')
 
+#Logout views
+def logout_view(request):
+    # print(f"Logout request method: {request.method}")  # Debug
+    if request.method == 'POST':
+        logout(request)
+        messages.success(request, "You have been logged out successfully.")
+        return redirect('index')
+    else:
+        return redirect('dashboard')
+
+
 def privacy(request):
     return render(request, 'privacy.html')
 
