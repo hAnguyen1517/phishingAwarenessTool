@@ -1,6 +1,10 @@
 // Form submission handling (for sign-up and sign-in)
 document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', (e) => {
+        // Skip the logout form
+        if (form.classList.contains('logout-form')) {
+            return; // Allow the form to submit naturally
+        }
         e.preventDefault();
         alert('Form submitted!');
         // Add API integration logic here
@@ -22,9 +26,14 @@ document.querySelectorAll('.sidebar ul li a').forEach(link => {
 
 // Dropdown menu
 document.querySelector('.user-info').addEventListener('click', (e) => {
-    e.preventDefault();
-    const dropdown = document.querySelector('.dropdown');
-    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    // Only prevent default if the click is not on the logout form, logout button, or profile link
+    const isLogoutForm = e.target.closest('.logout-form') || e.target.classList.contains('dropdown-logout');
+    const isProfileLink = e.target.tagName === 'A' && e.target.getAttribute('href') === '/dashboard/profile/';
+    if (!isLogoutForm && !isProfileLink) {
+        e.preventDefault();
+        const dropdown = document.querySelector('.dropdown');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
 });
 
 // Close dropdown when clicking outside
