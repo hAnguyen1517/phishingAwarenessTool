@@ -69,7 +69,7 @@ def settings(request):
 def profile(request):
     return render(request, 'dashboard/profile.html')
 
-def help(request):
+def dashboard_help(request):
     return render(request, 'dashboard/help.html')
 
 def template(request): #don't update this view
