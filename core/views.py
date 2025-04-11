@@ -51,9 +51,39 @@ def validate_password_strength(password, username, email):
 def index(request):
     return render(request, 'index.html')
 
+# Sign-in views
 def signin(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')  # Redirect if already logged in
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # Basic input validation
+        if not username or not password:
+            messages.error(request, "Please provide both username and password.")
+            return render(request, 'signin.html')
+
+        # Check if the username exists
+        try:
+            user = User.objects.get(username=username)
+            # Username exists, try to authenticate
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, f"Welcome back, {username}!")
+                return redirect('dashboard')
+            else:
+                messages.error(request, "The password you entered is incorrect.")
+                return render(request, 'signin.html')
+        except User.DoesNotExist:
+            messages.error(request, "The username does not exist.")
+            return render(request, 'signin.html')
+
     return render(request, 'signin.html')
-# Signup page
+
+# Signup Views
 def signup(request):
     if request.user.is_authenticated:
         return redirect('dashboard')  # Redirect if already logged in
@@ -102,7 +132,7 @@ def signup(request):
             # Create user
             user = User.objects.create_user(username=username, email=email, password=password)
             user.save()
-            messages.success(request, "Sign-up successful! Please sign in.")
+            messages.success(request, "Sign-up successfully! Please log in.")
             return redirect('signin')
         except ValidationError as e:
             messages.error(request, f"Error creating account: {str(e)}")
