@@ -1,0 +1,19 @@
+{% block content %}
+<h2>Quiz Complete</h2>
+<p>You answered {{ responses|length }} questions.</p>
+
+<ul>
+  {% for answer in responses %}
+    <li>Question {{ forloop.counter }}: {{ answer }}</li>
+  {% endfor %}
+</ul>
+
+<h3>Phishing Links Clicked:</h3>
+<ul>
+  {% for q in clicked_links %}
+    <li>Question {{ q }}</li>
+  {% empty %}
+    <li>No phishing links clicked 🎉</li>
+  {% endfor %}
+</ul>
+{% endblock %}

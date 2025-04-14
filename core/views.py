@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 import re
+import os
+from django.conf import settings
 
 # List of common passwords to block (you can expand this list)
 COMMON_PASSWORDS = [
@@ -13,6 +15,8 @@ COMMON_PASSWORDS = [
   '12345', 
     'qwertyuiop', 'qwerty', '123321',
 ]
+
+PHISHING_SIM_PATH = 'dashboard/phishing_sims/'
 
 def validate_password_strength(password, username, email):
     """
@@ -173,12 +177,13 @@ def profile(request):
     return render(request, 'dashboard/profile.html')
 
 def quiz(request):
+
     return render(request, 'dashboard/quiz.html')
 
 def report(request):
     return render(request, 'dashboard/report.html')
 
-def settings(request):
+def user_settings(request):
     return render(request, 'dashboard/settings.html')
 
 def template(request):
@@ -200,14 +205,66 @@ def training(request):
 
 @login_required
 def quiz(request):
-    return render(request, 'dashboard/quiz.html')
+    difficulty = 'easy'
+    sim_dir = os.path.join(settings.TEMPLATES[0]['DIRS'][0], PHISHING_SIM_PATH, difficulty)
+    sim_files = sorted([f for f in os.listdir(sim_dir) if f.endswith('.html')])
+    total_questions = len(sim_files)
+
+    if 'quiz_index' not in request.session:
+        request.session['quiz_index'] = 0
+        request.session['quiz_responses'] = []
+        request.session['clicked_phish_link'] = []
+
+    index = request.session['quiz_index']
+    
+    # End of quiz
+    if index >= total_questions:
+        responses = request.session.get('quiz_responses', [])
+        clicks = request.session.get('clicked_phish_link', [])
+        request.session.flush()
+        return render(request, 'dashboard/quiz_result.html', {
+            'responses': responses,
+            'clicked_links': clicks
+        })
+
+    # Determine what to include: real email or fake site
+    if request.session.get('show_fake_site', False):
+        sim_template = f"{sim_dir}/{index + 1}-site.html"
+    else:
+        sim_template = f"{sim_dir}/{index + 1}.html"
+
+    # Handle form submission
+    if request.method == 'POST':
+        answer = request.POST.get('answer')
+        request.session['quiz_responses'].append(answer)
+        request.session['quiz_index'] += 1
+        request.session['show_fake_site'] = False  # reset for next question
+        return redirect('phishing_quiz')
+
+    return render(request, 'dashboard/quiz.html', {
+        'sim_template': sim_template,
+        'question_number': index + 1,
+        'total': total_questions
+    })
+
+@login_required
+def phishing_clicked(request, question_number):
+    # Track it
+    clicked = request.session.get('clicked_phish_link', [])
+    if int(question_number) not in clicked:
+        clicked.append(int(question_number))
+        request.session['clicked_phish_link'] = clicked
+
+    # Show fake site
+    request.session['show_fake_site'] = True
+    return redirect('quiz')
 
 @login_required
 def report(request):
     return render(request, 'dashboard/report.html')
 
 @login_required
-def settings(request):
+def user_settings(request):
     return render(request, 'dashboard/settings.html')
 
 @login_required
