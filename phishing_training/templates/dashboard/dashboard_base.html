@@ -39,15 +39,28 @@
             <button class="hamburger">☰</button>
             <h1>{% block page_title %}{% endblock %}</h1>
             <div class="user-info">
-                Hi, User <span>▼</span>
+                Hi, {{ request.user.username }} <span>▼</span>
                 <div class="dropdown">
                     <a href="{% url 'profile' %}">Profile</a>
-                    <a href="#">Logout</a>
+                    <form method="post" action="{% url 'logout' %}" class="logout-form" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="dropdown-logout">Logout</button>
+                    </form>
                 </div>
             </div>
         </header>
 
         <div class="container">
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">
+                            {{ message }}
+                            <button class="dismiss" onclick="this.parentElement.style.display='none';">×</button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
             {% block content %}
             {% endblock %}
         </div>

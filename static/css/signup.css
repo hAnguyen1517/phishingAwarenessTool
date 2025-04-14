@@ -73,6 +73,24 @@ form {
   color: var(--text-secondary);
 }
 
+/* styles/signup.css */
+.form-text {
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  background-color: #f9f9f9;
+  border-left: 3px solid var(--accent-purple);
+  padding: var(--spacing-sm);
+  margin-top: var(--spacing-sm);
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  line-height: 1.5;
+  display: block;
+}
+
+.form-text strong {
+  color: var(--accent-purple);
+  font-weight: var(--font-weight-bold);
+}
+
 .signup-btn {
   background-color: var(--accent-purple);
   color: var(--white);
