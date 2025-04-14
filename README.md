@@ -43,11 +43,11 @@ phishing_training/
 │   └── templates/
 │       ├── base.html (done)
 │       ├── index.html (Homepage) - http://127.0.0.1:8000/ (done)
-│       ├── signin.html 
-│       ├── signup.html 
+│       ├── signin.html (done)
+│       ├── signup.html (done)
 │       ├── privacy.html - http://127.0.0.1:8000/privacy/ (done)
 │       ├── terms.html - http://127.0.0.1:8000/terms/ (done)
-│       ├── help.html http://127.0.0.1:8000/help/ (In the progress of fixing wrong linking)
+│       ├── help.html http://127.0.0.1:8000/help/ (done)
 │       ├── documentation.html - http://127.0.0.1:8000/documentation/ (done)
 │       └── dashboard/
 │           ├── dashboard_base.html (done)
@@ -57,7 +57,7 @@ phishing_training/
 │           ├── quiz.html
 │           ├── report.html
 │           ├── settings.html
-│           ├── template.html
+│           ├── template.html (don't edit it)
 │           └── training.html
 ├── core/
 │   ├── __init__.py
