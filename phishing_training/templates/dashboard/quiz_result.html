@@ -1,3 +1,13 @@
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block title %}Quiz - Phishing Training{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/quiz.css' %}">
+{% endblock %}
+
+{% block page_title %}Quiz{% endblock %}
 {% block content %}
 <h2>Quiz Complete</h2>
 <p>You answered {{ responses|length }} questions.</p>

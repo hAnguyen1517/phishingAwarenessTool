@@ -208,20 +208,30 @@ def quiz(request):
     difficulty = 'easy'
     sim_dir = os.path.join(settings.TEMPLATES[0]['DIRS'][0], PHISHING_SIM_PATH, difficulty)
     sim_files = sorted([f for f in os.listdir(sim_dir) if f.endswith('.html')])
-    total_questions = len(sim_files)
+    total_questions = len(sim_files)/2
+    next_button = 'Next'
+    print("hello")
 
     if 'quiz_index' not in request.session:
         request.session['quiz_index'] = 0
         request.session['quiz_responses'] = []
         request.session['clicked_phish_link'] = []
+        print("hello")
 
     index = request.session['quiz_index']
-    
+    print(index)
     # End of quiz
+    if index >= total_questions-1:
+        next_button = 'Submit'
+    else:
+        next_button = 'Next'
+
     if index >= total_questions:
         responses = request.session.get('quiz_responses', [])
         clicks = request.session.get('clicked_phish_link', [])
-        request.session.flush()
+        # Flush quiz session variables
+        for key in ['quiz_index', 'quiz_responses', 'clicked_phish_link', 'show_fake_site']:
+            request.session.pop(key, None)
         return render(request, 'dashboard/quiz_result.html', {
             'responses': responses,
             'clicked_links': clicks
@@ -235,16 +245,32 @@ def quiz(request):
 
     # Handle form submission
     if request.method == 'POST':
-        answer = request.POST.get('answer')
-        request.session['quiz_responses'].append(answer)
-        request.session['quiz_index'] += 1
-        request.session['show_fake_site'] = False  # reset for next question
-        return redirect('phishing_quiz')
+        action = request.POST.get('action')
+    
+        # If user clicked 'Next', save answer and move forward
+        if action == 'next':
+            answer = request.POST.get('answer')
+            responses = request.session.get('quiz_responses', [])
+            if len(responses) > index:
+                responses[index] = answer  # update existing
+            else:
+                responses.append(answer)
+            request.session['quiz_responses'] = responses
+            request.session['quiz_index'] += 1
+            request.session['show_fake_site'] = False
+
+        # If user clicked 'Previous', just go back (don't change answers here)
+        elif action == 'previous':
+            request.session['quiz_index'] = max(0, index - 1)
+            request.session['show_fake_site'] = False
+        print(index) 
+        return redirect('quiz')
 
     return render(request, 'dashboard/quiz.html', {
         'sim_template': sim_template,
         'question_number': index + 1,
-        'total': total_questions
+        'total': total_questions,
+        'next_button': next_button,
     })
 
 @login_required

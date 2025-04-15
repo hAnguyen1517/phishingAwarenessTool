@@ -12,7 +12,7 @@
 {% block content %}
     <div class="quiz-container">
         {% include sim_template %}
-        <form>
+        <form class="quiz-form" method="post">
             {% csrf_token %}
             <div class="quiz-question">
                 <p>{{ question_number }}. Is this a legitimate email?</p>
@@ -26,8 +26,8 @@
             </div>
 
             <div class="next-prev-buttons">
-                <button type="submit">Previous</a>
-                <button type="submit">Next</a>
+                <button type="submit" name="action" value="previous">Previous</a>
+                <button type="submit" name="action" value="next">{{ next_button }}</a>
             </div>
         </form>
     </div>
