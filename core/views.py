@@ -1,12 +1,16 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.template.loader import render_to_string
+from weasyprint import HTML
+from django.http import FileResponse
 import re
 import os
 from django.conf import settings
+from .models import UserReport, UserProfile
 
 # List of common passwords to block (you can expand this list)
 COMMON_PASSWORDS = [
@@ -205,39 +209,51 @@ def training(request):
 
 @login_required
 def quiz(request):
+    user = request.user
+    user_profile = get_object_or_404(UserProfile, user=user)
     difficulty = 'easy'
     sim_dir = os.path.join(settings.TEMPLATES[0]['DIRS'][0], PHISHING_SIM_PATH, difficulty)
     sim_files = sorted([f for f in os.listdir(sim_dir) if f.endswith('.html')])
     total_questions = len(sim_files)/2
     next_button = 'Next'
-    print("hello")
 
+    # First question
     if 'quiz_index' not in request.session:
         request.session['quiz_index'] = 0
         request.session['quiz_responses'] = []
         request.session['clicked_phish_link'] = []
-        print("hello")
 
     index = request.session['quiz_index']
-    print(index)
-    # End of quiz
+
+    # Last question
     if index >= total_questions-1:
         next_button = 'Submit'
     else:
         next_button = 'Next'
 
+    # Quiz finished
     if index >= total_questions:
         responses = request.session.get('quiz_responses', [])
         clicks = request.session.get('clicked_phish_link', [])
+        report = UserReport.objects.create(
+            user=user_profile,
+            difficulty=difficulty,
+            report_type='quiz',
+            responses={
+                'responses': responses,
+                'links_clicked': clicks,
+            },
+            num_questions=total_questions,
+            score=0.5,
+        )
         # Flush quiz session variables
         for key in ['quiz_index', 'quiz_responses', 'clicked_phish_link', 'show_fake_site']:
             request.session.pop(key, None)
         return render(request, 'dashboard/quiz_result.html', {
-            'responses': responses,
-            'clicked_links': clicks
+            'report': report,
         })
 
-    # Determine what to include: real email or fake site
+    # Determine what to include: email or fake site
     if request.session.get('show_fake_site', False):
         sim_template = f"{sim_dir}/{index + 1}-site.html"
     else:
@@ -273,6 +289,9 @@ def quiz(request):
         'next_button': next_button,
     })
 
+def grade_quiz(responses):
+    ...
+
 @login_required
 def phishing_clicked(request, question_number):
     # Track it
@@ -287,7 +306,34 @@ def phishing_clicked(request, question_number):
 
 @login_required
 def report(request):
-    return render(request, 'dashboard/report.html')
+    user = request.user
+    user_profile = get_object_or_404(UserProfile, user=user)
+    user_report = get_object_or_404(UserReport, user=user_profile, difficulty='easy', report_type='quiz')
+
+    return render(request, 'dashboard/report.html', {'report': user_report})
+
+@login_required
+def generate_report(request, report_type, difficulty):
+        # Get the UserProfile instance
+    user = request.user
+    user_profile = get_object_or_404(UserProfile, user=user)
+
+    # Query the UserReport
+    report = get_object_or_404(
+        UserReport,
+        user=user_profile,
+        difficulty=difficulty,
+        report_type=report_type  # or 'training' if you need that instead
+    )
+    # Render HTML
+    html_string = render_to_string('dashboard/quiz_result.html', {'report': report})
+    html = HTML(string=html_string)
+
+    # Generate PDF
+    pdf_file = html.write_pdf()
+    file_name = f'quiz_report_{report_type}_{difficulty}.pdf'
+    # Return PDF as response
+    return FileResponse(pdf_file, as_attachment=True, filename=file_name)    
 
 @login_required
 def user_settings(request):
