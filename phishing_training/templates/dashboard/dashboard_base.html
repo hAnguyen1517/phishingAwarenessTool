@@ -21,7 +21,7 @@
                 <ul>
                     <li><a href="{% url 'dashboard' %}" class="{% if request.path == '/dashboard/' %}active{% endif %}"><span class="icon">🏠</span> Dashboard</a></li>
                     <li><a href="{% url 'training' %}" class="{% if request.path == '/dashboard/training/' %}active{% endif %}"><span class="icon">📚</span> Training</a></li>
-                    <li><a href="{% url 'quiz' %}" class="{% if request.path == '/dashboard/quiz/' %}active{% endif %}"><span class="icon">❓</span> Quiz</a></li>
+                    <li><a href="{% url 'quiz-selection' %}" class="{% if request.path == '/dashboard/quiz/' %}active{% endif %}"><span class="icon">❓</span> Quiz</a></li>
                     <li><a href="{% url 'report' %}" class="{% if request.path == '/dashboard/report/' %}active{% endif %}"><span class="icon">📊</span> Reports</a></li>
                 </ul>
                 <h4>OTHERS</h4>
