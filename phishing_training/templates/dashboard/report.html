@@ -10,20 +10,23 @@
 {% block page_title %}Report{% endblock %}
 
 {% block content %}
-    <div class="report-section">
-        <h2>1. Initial Quiz</h2>
-        <button type="submit" class="view-report">View Report</button>
-    </div>
-    <div class="report-section">
-        <h2>2. Beginner Level (Basic Awareness)</h2>
-        <button type="submit" class="view-report">View Report</button>
-    </div>
-    <div class="report-section">
-        <h2>3. Intermediate Level (Recognizing Attacks)</h2>
-        <button type="submit" class="view-report">View Report</button>
-    </div>
-    <div class="report-section">
-        <h2>4. Advanced Level (Handling Phishing Attempts)</h2>
-        <button type="submit" class="view-report">View Report</button>
-    </div>
+    <form class="report-form" method="post" >
+        {% csrf_token %}
+        <div class="report-section">
+            <h2>1. Initial Quiz</h2>
+            <button type="submit" name="action" value="training" class="view-report">View Report</button>
+        </div>
+        <div class="report-section">
+            <h2>2. Beginner Level (Basic Awareness)</h2>
+            <button type="submit" name="action" value="easy" class="view-report">View Report</button>
+        </div>
+        <div class="report-section">
+            <h2>3. Intermediate Level (Recognizing Attacks)</h2>
+            <button type="submit" name="action" value="medium" class="view-report">View Report</button>
+        </div>
+        <div class="report-section">
+            <h2>4. Advanced Level (Handling Phishing Attempts)</h2>
+            <button type="submit" name="action" value="hard" class="view-report">View Report</button>
+        </div>
+    </form>
 {% endblock %}

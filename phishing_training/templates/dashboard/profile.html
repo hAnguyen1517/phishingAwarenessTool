@@ -15,26 +15,28 @@
     </div>
 
     <div class="profile-container">
-        <form>
+        <form method="post" class="profile-form">
+            {% csrf_token %}
             <label>Full Name</label>
-            <input type="text" placeholder="John Doe">
+            <input type="text" name="name" placeholder="{{ user.first_name }} {{ user.last_name }}">
             <label>Username</label>
-            <input type="text" placeholder="johndoe">
+            <input type="text" name="username" placeholder="{{ user }}">
             <label>Email Address</label>
-            <input type="email" placeholder="johndoe@email.com">
-            <button type="submit" class="view-report">Update Profile</button>
+            <input type="email" name="email" placeholder="{{ user.email }}">
+            <button type="submit" name="action" value="change_profile" class="view-report">Update Profile</button>
         </form>
     </div>
 
     <div class="profile-container">
-        <form>
+        <form method="post" class="password-form">
+            {% csrf_token %}
             <label>Old Password</label>
-            <input type="password" placeholder="Enter old password">
+            <input type="password" name="old-pass" placeholder="Enter old password">
             <label>New Password</label>
-            <input type="password" placeholder="Enter new password">
+            <input type="password" name="new-pass" placeholder="Enter new password">
             <label>Confirm New Password</label>
-            <input type="password" placeholder="Confirm new password">
-            <button type="submit" class="view-report">Update Password</button>
+            <input type="password" name="confirm-pass" placeholder="Confirm new password">
+            <button type="submit" name="action" value="change_pass" class="view-report">Update Password</button>
         </form>
     </div>
 
@@ -53,6 +55,6 @@
         <p class="stats-change.down">↓ 2.1% vs last week</p>
         <p class="stats-date">From 1-30 Jan, 2025</p>
         <div class="chart-placeholder line-chart">Line Chart Placeholder</div>
-        <button class="view-report">View Report</button>
+        <a href="{% url 'report' %}" class="view-report">View Report</a>
     </div>
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -7,6 +7,7 @@ from django.core.exceptions import ValidationError
 from django.template.loader import render_to_string
 from weasyprint import HTML
 from django.http import FileResponse
+import io
 import re
 import os
 from django.conf import settings
@@ -238,7 +239,6 @@ def quiz(request):
         report = UserReport.objects.create(
             user=user_profile,
             difficulty=difficulty,
-            report_type='quiz',
             responses={
                 'responses': responses,
                 'links_clicked': clicks,
@@ -294,7 +294,7 @@ def grade_quiz(responses):
 
 @login_required
 def phishing_clicked(request, question_number):
-    # Track it
+    # Track the click
     clicked = request.session.get('clicked_phish_link', [])
     if int(question_number) not in clicked:
         clicked.append(int(question_number))
@@ -308,22 +308,23 @@ def phishing_clicked(request, question_number):
 def report(request):
     user = request.user
     user_profile = get_object_or_404(UserProfile, user=user)
-    user_report = get_object_or_404(UserReport, user=user_profile, difficulty='easy', report_type='quiz')
+    user_report = get_object_or_404(UserReport, user=user_profile, difficulty='easy')
+    if request.method == "POST":
+        difficulty = request.POST.get('action')
+        print(difficulty)
+        report = generate_report(user_profile, difficulty)
+        return report
 
     return render(request, 'dashboard/report.html', {'report': user_report})
 
 @login_required
-def generate_report(request, report_type, difficulty):
-        # Get the UserProfile instance
-    user = request.user
-    user_profile = get_object_or_404(UserProfile, user=user)
-
+def generate_report(user_profile, difficulty):
     # Query the UserReport
+    print(user_profile, difficulty)
     report = get_object_or_404(
         UserReport,
         user=user_profile,
         difficulty=difficulty,
-        report_type=report_type  # or 'training' if you need that instead
     )
     # Render HTML
     html_string = render_to_string('dashboard/quiz_result.html', {'report': report})
@@ -331,9 +332,10 @@ def generate_report(request, report_type, difficulty):
 
     # Generate PDF
     pdf_file = html.write_pdf()
-    file_name = f'quiz_report_{report_type}_{difficulty}.pdf'
+    file_name = f'quiz_report_{difficulty}.pdf'
+    pdf_buffer = io.BytesIO(pdf_file)
     # Return PDF as response
-    return FileResponse(pdf_file, as_attachment=True, filename=file_name)    
+    return FileResponse(pdf_buffer, as_attachment=True, filename=file_name)    
 
 @login_required
 def user_settings(request):
@@ -341,7 +343,66 @@ def user_settings(request):
 
 @login_required
 def profile(request):
-    return render(request, 'dashboard/profile.html')
+    user = request.user
+    if request.method == 'POST':
+        action = request.POST.get('action')
+
+        if action == 'change_profile':
+            return change_profile(request, user)
+        elif action == 'change_pass':
+            return change_pass(request, user)
+
+    return render(request, 'dashboard/profile.html', {'user': user})
+
+@login_required
+def change_profile(request, user):
+    full_name = request.POST.get('name', '')
+    username = request.POST.get('username', '')
+    email = request.POST.get('email', '')
+
+    if full_name:
+        names = full_name.strip().split(' ', 1)
+        user.first_name = names[0]
+        user.last_name = names[1] if len(names) > 1 else ''
+
+    if username:
+        user.username = username
+
+    if email:
+        user.email = email
+
+    user.save()
+    messages.success(request, 'Profile updated successfully.')
+    return redirect('profile')    
+
+@login_required
+def change_pass(request, user):
+    old_pass = request.POST.get('old-pass')
+    new_pass = request.POST.get('new-pass')
+    confirm_pass = request.POST.get('confirm-pass')
+    print(new_pass)
+    print(confirm_pass)
+
+    if not user.check_password(old_pass):
+        messages.error(request, 'Old password is incorrect.')
+        return redirect('profile')
+
+    if new_pass != confirm_pass:
+        messages.error(request, 'New passwords do not match.')
+        return redirect('profile')
+
+    pass_valid = validate_password_strength(new_pass, user.username, user.email)
+
+    if not pass_valid:
+        messages.error(request, pass_valid)
+        return redirect('profile')
+        
+    user.set_password(new_pass)
+    user.save()
+    update_session_auth_hash(request, user)  # Keep user logged in
+
+    messages.success(request, 'Password updated successfully.')
+    return redirect('profile')
 
 @login_required
 def dashboard_help(request):

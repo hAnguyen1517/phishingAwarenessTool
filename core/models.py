@@ -34,14 +34,14 @@ class UserReport(models.Model):
                         ('medium', 'Medium'), 
                         ('hard', 'Hard')
     )
-    TYPES = (
-                ('quiz', 'Quiz'),
-                ('training','Training')
-    )
+    #TYPES = (
+    #            ('quiz', 'Quiz'),
+    #            ('training','Training')
+    #)
 
     user = models.OneToOneField(UserProfile, on_delete=models.CASCADE, related_name='profile')
     difficulty = models.CharField(max_length=20, choices=DIFFICULTIES)
-    report_type = models.CharField(max_length=20, choices=TYPES)
+    #report_type = models.CharField(max_length=20, choices=TYPES)
     responses = models.JSONField(null=True, blank=True)
     num_questions = models.IntegerField(null=True, blank=True)
     score = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
