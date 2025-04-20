@@ -1,4 +1,3 @@
-{% extends 'dashboard/dashboard_base.html' %}
 {% load static %}
 
 {% block title %}{{ difficulty }} Quiz - Phishing Training{% endblock %}
@@ -9,10 +8,6 @@
 
 {% block page_title %}{{ difficulty }} Quiz{% endblock %}
 {% block content %}
-<form class="quiz-form" method="post">
-  {% csrf_token %}
-  <button type="submit" name="action" value="back" class="back-button">All Quizes</button>    
-</form>
 <h2>Quiz Complete</h2>
 <p><strong>Score:</strong> {{ score|floatformat:0 }}%</p>
 <p>You answered {{ report.responses.responses|length }} questions.</p>

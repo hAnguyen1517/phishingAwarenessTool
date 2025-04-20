@@ -14,47 +14,64 @@
         <img src="https://media.istockphoto.com/id/1451587807/vector/user-profile-icon-vector-avatar-or-person-icon-profile-picture-portrait-symbol-vector.jpg?s=612x612&w=0&k=20&c=yDJ4ITX1cHMh25Lt1vI1zBn2cAKKAlByHBvPJ8gEiIg=" alt="Profile Image" class="profile-image">
     </div>
 
-    <div class="profile-container">
-        <form method="post" class="profile-form">
-            {% csrf_token %}
-            <label>Full Name</label>
-            <input type="text" name="name" placeholder="{{ user.first_name }} {{ user.last_name }}">
-            <label>Username</label>
-            <input type="text" name="username" placeholder="{{ user }}">
-            <label>Email Address</label>
-            <input type="email" name="email" placeholder="{{ user.email }}">
-            <button type="submit" name="action" value="change_profile" class="view-report">Update Profile</button>
-        </form>
-    </div>
+    <div class="profile-grid">
+        <div class="profile-container">
+            <form method="post" class="profile-form">
+                {% csrf_token %}
+                <label>Full Name</label>
+                <input type="text" name="name" placeholder="{{ user.first_name }} {{ user.last_name }}">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="{{ user }}">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="{{ user.email }}">
+                <button type="submit" name="action" value="change_profile" class="view-report">Update Profile</button>
+            </form>
+        </div>
 
-    <div class="profile-container">
-        <form method="post" class="password-form">
-            {% csrf_token %}
-            <label>Old Password</label>
-            <input type="password" name="old-pass" placeholder="Enter old password">
-            <label>New Password</label>
-            <input type="password" name="new-pass" placeholder="Enter new password">
-            <label>Confirm New Password</label>
-            <input type="password" name="confirm-pass" placeholder="Confirm new password">
-            <button type="submit" name="action" value="change_pass" class="view-report">Update Password</button>
-        </form>
-    </div>
 
-    <div class="profile-container">
-        <div class="charts">
-            <div class="chart-card">
-                <h3>Your Rating</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                <div class="chart-placeholder bubble-chart">Bubble Chart Placeholder</div>
-            </div>
+        <div class="profile-container">
+            <form method="post" class="password-form">
+                {% csrf_token %}
+                <label>Old Password</label>
+                <input type="password" name="old-pass" placeholder="Enter old password">
+                <label>New Password</label>
+                <input type="password" name="new-pass" placeholder="Enter new password">
+                <label>Confirm New Password</label>
+                <input type="password" name="confirm-pass" placeholder="Confirm new password">
+                <button type="submit" name="action" value="change_pass" class="view-report">Update Password</button>
+            </form>
         </div>
     </div>
-    <div class="profile-container">
-        <h3>Your Reports</h3>
-        <p class="stats-value">2.568</p>
-        <p class="stats-change.down">↓ 2.1% vs last week</p>
-        <p class="stats-date">From 1-30 Jan, 2025</p>
-        <div class="chart-placeholder line-chart">Line Chart Placeholder</div>
-        <a href="{% url 'report' %}" class="view-report">View Report</a>
+
+    <div class="charts-grid">
+        <div class="profile-container">
+            <div class="charts">
+                <div class="chart-card">
+                    <h3>Your Rating</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                    {% if user_rating %}
+                    <div class="chart-placeholder bubble-chart">
+                        {{ user_rating|safe }}
+                    </div>
+                    {% else %}
+                    <div class="chart-placeholder bubble-chart">Bubble Chart Placeholder</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="profile-container">
+            <h3>Your Reports</h3>
+            <p class="stats-value">2.568</p>
+            <p class="stats-change.down">↓ 2.1% vs last week</p>
+            <p class="stats-date">From 1-30 Jan, 2025</p>
+            {% if user_reports %}
+            <div class="chart-placeholder line-chart">
+                {{ user_reports|safe }}
+            </div>
+            {% else %}
+            <div class="chart-placeholder line-chart">Line Chart Placeholder</div>
+            {% endif %}
+            <a href="{% url 'report' %}" class="view-report">View Report</a>
+        </div>
     </div>
 {% endblock %}

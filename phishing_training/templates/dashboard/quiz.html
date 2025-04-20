@@ -1,19 +1,20 @@
 {% extends 'dashboard/dashboard_base.html' %}
 {% load static %}
 
-{% block title %}Quiz - Phishing Training{% endblock %}
+{% block title %}{{ difficulty }} Quiz - Phishing Training{% endblock %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/quiz.css' %}">
 {% endblock %}
 
-{% block page_title %}Quiz{% endblock %}
+{% block page_title %}{{ difficulty }} Quiz{% endblock %}
 
 {% block content %}
-    <div class="quiz-container">
-        {% include sim_template %}
-        <form class="quiz-form" method="post">
-            {% csrf_token %}
+    <form class="quiz-form" method="post">
+        {% csrf_token %}
+        <button type="submit" name="action" value="back" class="back-button">All Quizes</button>    
+        <div class="quiz-container">
+            {% include sim_template %}
             <div class="quiz-question">
                 <p>{{ question_number }}. Is this a legitimate email?</p>
                 <label>
@@ -29,6 +30,6 @@
                 <button type="submit" name="action" value="previous">Previous</a>
                 <button type="submit" name="action" value="next">{{ next_button }}</a>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 {% endblock %}

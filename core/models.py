@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -39,9 +40,14 @@ class UserReport(models.Model):
     #            ('training','Training')
     #)
 
-    user = models.OneToOneField(UserProfile, on_delete=models.CASCADE, related_name='profile')
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='profile')
     difficulty = models.CharField(max_length=20, choices=DIFFICULTIES)
     #report_type = models.CharField(max_length=20, choices=TYPES)
     responses = models.JSONField(null=True, blank=True)
     num_questions = models.IntegerField(null=True, blank=True)
     score = models.DecimalField(max_digits=3, decimal_places=2, null=True, blank=True)
+    time_stamp = models.DateTimeField(default=timezone.now)
+
+class FrequentQuestions(models.Model):
+    question = models.CharField(max_length=500, null=True, blank=True)
+    times_asked = models.IntegerField(default=1)
