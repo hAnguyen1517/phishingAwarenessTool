@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
 from .models import HelpRequest, UserProfile
 import re
 
@@ -241,23 +242,33 @@ def profile(request):
     return render(request, 'dashboard/profile.html')
 
 @login_required
-def dashboard_help(request):
+def help(request):
     if request.method == 'POST':
         subject = request.POST.get('subject')
         message = request.POST.get('message')
+        user_email = request.user.email if request.user.is_authenticated else 'support@phishingtool.com'
 
+        # Basic validation
         if not subject or not message:
             messages.error(request, "Please fill in both subject and message.")
         else:
-            HelpRequest.objects.create(
-                user=request.user,
-                subject=subject,
-                message=message
-            )
-            messages.success(request, "Your help request has been submitted successfully.")
+            try:
+                # Define standard email components
+                send_mail(
+                    subject=f"[Help Request] {subject}",
+                    message=f"From: {user_email}\n\nMessage:\n{message}",
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[settings.SUPPORT_EMAIL],
+                    fail_silently=False,
+                )
+                messages.success(request,
+                                 "Your message has been sent successfully. Our team will get back to you shortly.")
+            except Exception as e:
+                messages.error(request, f"An error occurred while sending your message: {e}")
 
-    return render(request, 'dashboard/help.html')
+    return render(request, 'help.html')
 
 @login_required
 def template(request): #don't update this view
     return render(request, 'dashboard/template.html')
+
