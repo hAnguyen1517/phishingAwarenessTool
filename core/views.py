@@ -179,30 +179,6 @@ def help(request):
 def documentation(request):
     return render(request, 'documentation.html')
 
-def dashboard(request):
-    return render(request, 'dashboard/dashboard.html')
-
-def dashboard_help(request):
-    return render(request, 'dashboard/help.html')
-
-def profile(request):
-    return render(request, 'dashboard/profile.html')
-
-def quiz(request):
-
-    return render(request, 'dashboard/quiz.html')
-
-def report(request):
-    return render(request, 'dashboard/report.html')
-
-def user_settings(request):
-    return render(request, 'dashboard/settings.html')
-
-def template(request):
-    return render(request, 'dashboard/template.html')
-
-def training(request):
-    return render(request, 'dashboard/training.html')
 
 
 # Dashboard views (all protected with @login_required)
