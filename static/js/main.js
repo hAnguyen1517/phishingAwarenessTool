@@ -2,7 +2,7 @@
 document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', (e) => {
         // Skip the logout form
-        if (form.classList.contains('logout-form')) {
+        if (form.classList.contains('logout-form') || form.classList.contains('contact-form') || form.classList.contains('settings-form')) {
             return; // Allow the form to submit naturally
         }
         e.preventDefault();

@@ -4,13 +4,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from .models import HelpRequest, UserProfile
 import re
 
 # List of common passwords to block (you can expand this list)
 COMMON_PASSWORDS = [
-    'welcome123', 'monkey123', 'football123', 'abc123456', 'password1', 
+    'welcome123', 'monkey123', 'football123', 'abc123456', 'password1',
     '123456789', '1234567', '#Password1', '123456', '1234567890',   'password123', 'admin123', '12345678', 'qwerty123', 'letmein123',
-  '12345', 
+  '12345',
     'qwertyuiop', 'qwerty', '123321',
 ]
 
@@ -163,6 +164,29 @@ def help(request):
 def documentation(request):
     return render(request, 'documentation.html')
 
+def dashboard(request):
+    return render(request, 'dashboard/dashboard.html')
+
+def dashboard_help(request):
+    return render(request, 'dashboard/help.html')
+
+def profile(request):
+    return render(request, 'dashboard/profile.html')
+
+def quiz(request):
+    return render(request, 'dashboard/quiz.html')
+
+def report(request):
+    return render(request, 'dashboard/report.html')
+
+def settings(request):
+    return render(request, 'dashboard/settings.html')
+
+def template(request):
+    return render(request, 'dashboard/template.html')
+
+def training(request):
+    return render(request, 'dashboard/training.html')
 
 
 # Dashboard views (all protected with @login_required)
@@ -185,7 +209,32 @@ def report(request):
 
 @login_required
 def settings(request):
-    return render(request, 'dashboard/settings.html')
+    if request.method == 'POST':
+        # Extract form data
+        theme = request.POST.get('theme')
+        difficulty = request.POST.get('difficulty')
+        share_score = request.POST.get('share-score') == 'on'  # Convert checkbox to boolean
+        share_progress = request.POST.get('share-progress') == 'on'
+        feedback = request.POST.get('feedback')
+
+        # Save the user settings in the database
+        user_profile = request.user.profile  # Get the related UserProfile
+
+        # Update profile fields
+        user_profile.theme = theme
+        user_profile.difficulty = difficulty
+        user_profile.share_score = share_score
+        user_profile.share_progress = share_progress
+        user_profile.feedback = feedback
+
+        user_profile.save()
+
+        messages.success(request, "Your settings have been updated successfully.")
+
+        # Redirect back to the settings page (to show a success message)
+        return redirect('settings')
+
+    return render(request, 'dashboard/settings.html', {'profile': profile})
 
 @login_required
 def profile(request):
@@ -193,6 +242,20 @@ def profile(request):
 
 @login_required
 def dashboard_help(request):
+    if request.method == 'POST':
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        if not subject or not message:
+            messages.error(request, "Please fill in both subject and message.")
+        else:
+            HelpRequest.objects.create(
+                user=request.user,
+                subject=subject,
+                message=message
+            )
+            messages.success(request, "Your help request has been submitted successfully.")
+
     return render(request, 'dashboard/help.html')
 
 @login_required
