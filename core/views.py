@@ -195,7 +195,7 @@ def quiz(request):
 def report(request):
     return render(request, 'dashboard/report.html')
 
-def settings(request):
+def user_settings(request):
     return render(request, 'dashboard/settings.html')
 
 def template(request):
