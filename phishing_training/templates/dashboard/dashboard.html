@@ -13,14 +13,30 @@
     <div class="stats">
         <div class="stats-card">
             <h3>SRate</h3>
+            {% if daily_averages %}
+            <p class="stats-value">7.85%</p>
+            <p class="stats-change">↑ 2.1% vs last week</p>
+            <p class="stats-date">Reports from 1-12 Dec, 2024</p>
+            <div class="chart-placeholder bar-chart">
+                {{ daily_averages|safe }}
+            </div>
+            {% else %}
             <p class="stats-value">7.85%</p>
             <p class="stats-change">↑ 2.1% vs last week</p>
             <p class="stats-date">Reports from 1-12 Dec, 2024</p>
             <div class="chart-placeholder bar-chart">Bar Chart Placeholder</div>
-            <button class="view-report">View Report</button>
+            {% endif %}
+            <a href="{% url 'report' %}" class="view-report">View Report</a>
         </div>
         <div class="stats-card">
             <h3>Total Reports</h3>
+
+            {% if total_reports %}
+            <p class="stats-date">From 1-30 February, 2025</p>
+            <div class="chart-placeholder donut-chart">
+                {{ total_reports|safe }}
+            </div>
+            {% else %}
             <p class="stats-date">From 1-30 February, 2025</p>
             <div class="chart-placeholder donut-chart">Donut Chart Placeholder</div>
             <div class="chart-legend">
@@ -28,8 +44,8 @@
                 <span>Trainers <span class="legend-color" style="background-color: #6A7DD3;"></span> 32%</span>
                 <span>Staff <span class="legend-color" style="background-color: #A9B6F0;"></span> 28%</span>
             </div>
-            <button class="view-report">View Report</button>
-            <div class="report-count">1,080 Reports</div>
+            {% endif %}
+            <a href="{% url 'report' %}" class="view-report">View Report</a>
         </div>
     </div>
 
@@ -38,16 +54,21 @@
             <div class="chart-card">
                 <h3>Your Rating</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                {% if total_reports %}
+                <div class="chart-placeholder bubble-chart">
+                    {{ user_rating|safe }}
+                </div>
+                {% else %}
                 <div class="chart-placeholder bubble-chart">Bubble Chart Placeholder</div>
+                {% endif %}
             </div>
         </div>
         <div class="card">
             <h3>Most Asked Questions</h3>
             <ul class="question-list">
-                <li><img src="https://via.placeholder.com/30" alt="User"> Most common question that most students fail</li>
-                <li><img src="https://via.placeholder.com/30" alt="User"> Most common sign of a phishing email</li>
-                <li><img src="https://via.placeholder.com/30" alt="User"> Things to check before clicking a link</li>
-                <li><img src="https://via.placeholder.com/30" alt="User"> Security feature to prevent phishing</li>
+                {% for question in questions %}
+                <li><img src="https://via.placeholder.com/30" alt="User"> {{ question.question }}</li>
+                {% endfor %}
             </ul>
         </div>
         <div class="card">
@@ -55,8 +76,15 @@
             <p class="stats-value">2.568</p>
             <p class="stats-change">↓ 2.1% vs last week</p>
             <p class="stats-date">From 1-30 Jan, 2025</p>
+            {% if total_reports %}
+            <div class="chart-placeholder line-chart">
+                {{ user_reports|safe }}
+
+            </div>
+            {% else %}
             <div class="chart-placeholder line-chart">Line Chart Placeholder</div>
-            <button class="view-report">View Report</button>
+            {% endif %}
+            <a href="{% url 'report' %}" class="view-report">View Report</a>
         </div>
     </div>
 {% endblock %}

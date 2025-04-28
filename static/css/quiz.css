@@ -54,21 +54,36 @@ input[type="radio"]:checked {
     padding-bottom: 50px;
 }
 
-.next-prev-buttons a {
-    background-color: #FBFCFE;
-    color: #5A6ACF;
-    border: solid;
-    border-color: #DDE4F0;
-    border-width: 2px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    width: 150px;  /* Fixed width for uniform shape */
-    border-radius: .5rem; /* No rounded corners (rectangular) */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+.next-prev-buttons button {
+    background-color: #FBFCFE !important;
+    color: #5A6ACF !important;
+    border: solid !important;
+    border-color: #DDE4F0 !important;
+    border-width: 2px !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    width: 150px !important;  /* Fixed width for uniform shape */
+    border-radius: .5rem !important; /* No rounded corners (rectangular) */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2) !important;
 }
 
 .next-prev-buttons a:hover {
     background-color: #E1E2E4;
+}
+
+.back-button {
+    background-color: #FBFCFE !important;
+    color: #5A6ACF !important;
+    border: solid !important;
+    border-color: #DDE4F0 !important;
+    border-width: 2px !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    width: 150px !important;  /* Fixed width for uniform shape */
+    border-radius: .5rem !important; /* No rounded corners (rectangular) */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2) !important;
+    padding-bottom: 10px;
 }
 

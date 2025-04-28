@@ -1,0 +1,29 @@
+{% load static %}
+
+{% block title %}{{ difficulty }} Quiz - Phishing Training{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/quiz.css' %}">
+{% endblock %}
+
+{% block page_title %}{{ difficulty }} Quiz{% endblock %}
+{% block content %}
+<h2>Quiz Complete</h2>
+<p><strong>Score:</strong> {{ score|floatformat:0 }}%</p>
+<p>You answered {{ report.responses.responses|length }} questions.</p>
+
+<ul>
+  {% for answer in report.responses.responses %}
+    <li>Question {{ forloop.counter }}: {{ answer }}</li>
+  {% endfor %}
+</ul>
+
+<h3>Phishing Links Clicked:</h3>
+<ul>
+  {% for q in report.responses.clicked_links %}
+    <li>Question {{ q }}</li>
+  {% empty %}
+    <li>No phishing links clicked 🎉</li>
+  {% endfor %}
+</ul>
+{% endblock %}
