@@ -35,12 +35,6 @@
     position: relative;
 }
 
-.play-icon {
-    font-size: 60px;
-    color: #000000;
-    opacity: 0.8;
-}
-
 .more-about-us {
     padding: var(--spacing-lg);
 }
