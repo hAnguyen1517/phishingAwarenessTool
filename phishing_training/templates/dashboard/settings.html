@@ -14,36 +14,37 @@
         <h2>Settings</h2>
         <p>Update your preferences below.</p>
 
-        <form class="settings-form">
+        <form class="settings-form" method="POST">
+            {% csrf_token %}
             <!-- Theme Selection -->
             <label for="theme">Theme:</label>
-            <select id="theme">
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
+            <select id="theme" name="theme">
+                <option value="light" {% if user.profile.theme == 'light' %}selected{% endif %}>Light</option>
+                <option value="dark" {% if user.profile.theme == 'dark' %}selected{% endif %}>Dark</option>
             </select>
 
             <!-- Quiz Difficulty -->
             <label for="difficulty">Quiz Difficulty:</label>
-            <select id="difficulty">
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
+            <select id="difficulty" name="difficulty">
+                <option value="easy" {% if user.profile.difficulty == 'easy' %}selected{% endif %}>Easy</option>
+                <option value="medium" {% if user.profile.difficulty == 'medium' %}selected{% endif %}>Medium</option>
+                <option value="hard" {% if user.profile.difficulty == 'hard' %}selected{% endif %}>Hard</option>
             </select>
 
             <!-- Sharing Options -->
             <label>Sharing Options:</label>
             <div class="checkbox-group">
                 <label for="share-score">Share my quiz scores</label>
-                <input type="checkbox" id="share-score">
+                <input type="checkbox" id="share-score" name="share-score" {% if user.profile.share_score %}checked{% endif %}>
             </div>
             <div class="checkbox-group">
                 <label for="share-progress">Share my learning progress</label>
-                <input type="checkbox" id="share-progress">
+                <input type="checkbox" id="share-progress" name="share-progress" {% if user.profile.share_progress %}checked{% endif %}>
             </div>
 
             <!-- Feedback -->
             <label for="feedback">Feedback:</label>
-            <textarea id="feedback" rows="4" placeholder="Write your feedback here..."></textarea>
+            <textarea id="feedback" name="feedback" rows="4" placeholder="Write your feedback here...">{{ user.profile.feedback }}</textarea>
 
             <button type="submit">Save Changes</button>
         </form>

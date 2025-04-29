@@ -1,0 +1,34 @@
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block title %}{{ difficulty }} Quiz - Phishing Training{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/quiz.css' %}">
+{% endblock %}
+
+{% block page_title %}{{ difficulty }} Quiz{% endblock %}
+{% block content %}
+<form class="quiz-form" method="post">
+  {% csrf_token %}
+  <button type="submit" name="action" value="back" class="back-button">All Quizes</button>    
+</form>
+<h2>Quiz Complete</h2>
+<p><strong>Score:</strong> {{ score|floatformat:0 }}%</p>
+<p>You answered {{ report.responses.responses|length }} questions.</p>
+
+<ul>
+  {% for answer in report.responses.responses %}
+    <li>Question {{ forloop.counter }}: {{ answer }}</li>
+  {% endfor %}
+</ul>
+
+<h3>Phishing Links Clicked:</h3>
+<ul>
+  {% for q in report.responses.clicked_links %}
+    <li>Question {{ q }}</li>
+  {% empty %}
+    <li>No phishing links clicked 🎉</li>
+  {% endfor %}
+</ul>
+{% endblock %}

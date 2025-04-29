@@ -1,8 +1,9 @@
 // Form submission handling (for sign-up and sign-in)
+const requiredClasses = ['logout-form', 'fake-site-form', 'quiz-form', 'report-form', 'password-form', 'profile-form', 'contact-form', 'profile-form']
 document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', (e) => {
         // Skip the logout form
-        if (form.classList.contains('logout-form')) {
+        if (requiredClasses.some(cls => form.classList.contains(cls))) {
             return; // Allow the form to submit naturally
         }
         e.preventDefault();
