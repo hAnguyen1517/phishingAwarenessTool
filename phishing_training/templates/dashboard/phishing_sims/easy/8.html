@@ -1,0 +1,15 @@
+{% block quiz %}
+<div class="quiz-phishing-sim">
+<div style="font-family: 'Calibri', sans-serif; background-color: #eef6ff; padding: 30px; border-left: 6px solid #2c3e50;">
+    <h2 style="color: #2c3e50;">📢 Important Update: 2025 Employee Benefits</h2>
+    <p>Dear Employee,</p>
+    <p>HR has released an updated guide for 2025 healthcare, dental, and remote work benefits.</p>
+    <p>Please log in with your credentials to view and confirm your choices by <strong>May 5, 2025</strong>.</p>
+    <a href="{% url 'phishing_clicked' question_number=question_number %}" style="background-color: #2c3e50; color: white; padding: 10px 25px; text-decoration: none; border-radius: 3px;">
+        View Benefits Guide
+    </a>
+    <p style="margin-top: 20px;">— HR Services</p>
+</div>
+</div>
+
+{% endblock  %}
