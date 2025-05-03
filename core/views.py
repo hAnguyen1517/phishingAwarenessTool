@@ -5,7 +5,6 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.template.loader import render_to_string
-from weasyprint import HTML
 from django.http import FileResponse
 from django.db.models import Avg, Count
 from django.db.models.functions import TruncDate
