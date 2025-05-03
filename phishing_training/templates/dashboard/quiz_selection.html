@@ -13,16 +13,22 @@
     <form class="report-form" method="post" >
         {% csrf_token %}
         <div class="report-section">
-            <h2>1. Beginner Level (Basic Awareness)</h2>
+            <h2>Initial Quiz</h2>
+            <button type="submit" name="action" value="initial" class="view-report">Take Quiz</button>
+        </div>
+        {% if inital_quiz %}
+        <div class="report-section">
+            <h2>Beginner Level (Basic Awareness)</h2>
             <button type="submit" name="action" value="easy" class="view-report">Take Quiz</button>
         </div>
         <div class="report-section">
-            <h2>2. Intermediate Level (Recognizing Attacks)</h2>
+            <h2>Intermediate Level (Recognizing Attacks)</h2>
             <button type="submit" name="action" value="medium" class="view-report">Take Quiz</button>
         </div>
         <div class="report-section">
-            <h2>3. Advanced Level (Handling Phishing Attempts)</h2>
+            <h2>Advanced Level (Handling Phishing Attempts)</h2>
             <button type="submit" name="action" value="hard" class="view-report">Take Quiz</button>
         </div>
+        {% endif %}
     </form>
 {% endblock %}

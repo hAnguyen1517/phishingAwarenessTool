@@ -9,7 +9,7 @@ from django.http import FileResponse
 from django.db.models import Avg, Count
 from django.db.models.functions import TruncDate
 from django.conf import settings
-from .models import FrequentQuestions, UserReport, UserProfile, FrequentQuestions
+from .models import FrequentQuestions, UserReport, UserProfile, InitalQuizQuestions
 from django.http import Http404
 from django.template.loader import get_template
 import plotly.graph_objs as go
@@ -383,12 +383,76 @@ def training(request):
 
 @login_required
 def quiz_selection(request):
+    user = request.user
+    user_profile = get_object_or_404(UserProfile, user=user)
     if request.method == 'POST':
         difficulty = request.POST.get('action')
         request.session['selected_difficulty'] = difficulty
+        if difficulty == 'initial':
+            return redirect('initial-quiz')
         return redirect('quiz')  # Assuming 'quiz' is your existing view name
 
-    return render(request, 'dashboard/quiz_selection.html')
+    return render(request, 'dashboard/quiz_selection.html', {'inital_quiz': user_profile.inital_quiz})
+
+@login_required
+def initial_quiz(request):
+    user = request.user
+    user_profile = get_object_or_404(UserProfile, user=user)
+    questions = list(InitalQuizQuestions.objects.all())
+    difficulty = 'initial'
+
+    # Handle form submission
+    if request.method == 'POST':
+        action = request.POST.get('action')
+    
+        # If user clicked 'Next', save answer and move forward
+        if action == 'submit':
+            responses = {}
+            for i in range(len(questions)): 
+                key = f"answer_{i}"
+                responses[key] = request.POST.get(key)
+            print(responses)
+            score = grade_inital_quiz(responses, questions)
+            user_profile.inital_quiz = True
+            user_profile.save()
+            report = UserReport.objects.create(
+                user=user_profile,
+                difficulty=difficulty,
+                responses={
+                    'responses': responses,
+                },
+                num_questions=len(questions),
+                score=score,
+            )
+            report.save()
+
+            report.difficulty = difficulty.capitalize()
+            return render(request, 'dashboard/quiz_result.html', {
+                'report': report,
+                'score': score*100,
+            })
+
+        # If user clicked 'Previous', just go back (don't change answers here)
+        elif action == 'back':
+            for key in ['quiz_index', 'quiz_responses', 'clicked_phish_link', 'show_fake_site', 'selected_difficulty']:
+                request.session.pop(key, None)
+            return redirect('quiz-selection')
+        return redirect('quiz')
+    return render(request, 'dashboard/quiz_inital.html', {'questions': questions})
+
+def grade_inital_quiz(responses, questions):
+    total = len(questions)
+    correct = 0
+    for i, question in enumerate(questions):
+        submitted = responses.get(f'answer_{i}')
+        print(question)
+        correct_answer = question.correct_answer
+
+        if submitted == correct_answer:
+            correct += 1
+
+    score = (correct / total) if total else 0
+    return score
 
 @login_required
 def quiz(request):
@@ -430,6 +494,7 @@ def quiz(request):
             num_questions=total_questions,
             score=score,
         )
+        report.difficulty = difficulty.capitalize()
         # Flush quiz session variables
         for key in ['quiz_index', 'quiz_responses', 'clicked_phish_link', 'show_fake_site']:
             request.session.pop(key, None)

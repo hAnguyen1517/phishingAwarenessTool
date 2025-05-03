@@ -74,6 +74,7 @@ input[type="radio"]:checked {
 
 .back-button {
     background-color: #FBFCFE !important;
+    margin-bottom: 10px;
     color: #5A6ACF !important;
     border: solid !important;
     border-color: #DDE4F0 !important;
@@ -85,5 +86,45 @@ input[type="radio"]:checked {
     border-radius: .5rem !important; /* No rounded corners (rectangular) */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2) !important;
     padding-bottom: 10px;
+}
+
+.result-card {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 30px;
+    text-align: center;
+}
+
+.result-card h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.result-card ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+}
+
+.result-card li {
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.result-card button.back-button {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.result-card button.back-button:hover {
+    background-color: #2980b9;
 }
 

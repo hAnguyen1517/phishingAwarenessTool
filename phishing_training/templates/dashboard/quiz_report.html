@@ -71,18 +71,19 @@
     </style>
 </head>
 <body>
+    <div class="result-card">
     <div class="report-container">
         <h1>{{ report.difficulty }} Quiz Report</h1>
         <p class="score">Final Score: {{ score|floatformat:0 }}%</p>
         <p>Total Questions Answered: {{ report.responses.responses|length }}</p>
 
+        {% if report.difficulty != "Initial"%}
         <h3>Your Answers</h3>
         <ul>
             {% for answer in report.responses.responses %}
                 <li>Question {{ forloop.counter }}: {{ answer }}</li>
             {% endfor %}
         </ul>
-
         <h3>Phishing Links Clicked</h3>
         <ul>
             {% for q in report.responses.clicked_links %}
@@ -91,7 +92,9 @@
                 <li class="no-clicks">No phishing links clicked</li>
             {% endfor %}
         </ul>
+        {% endif %}
     </div>
+</div>
 </body>
 </html>
 {% endblock %}

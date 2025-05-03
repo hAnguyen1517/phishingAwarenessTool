@@ -13,6 +13,7 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('dashboard/help/', views.dashboard_help, name='dashboard_help'),
     path('dashboard/profile/', views.profile, name='profile'),
+    path('dashboard/initial-quiz', views.initial_quiz, name='initial-quiz'),
     path('dashboard/quiz/', views.quiz, name='quiz'),
     path('dashboard/quiz-selection/', views.quiz_selection, name='quiz-selection'),
     path('quiz/phish-clicked/<int:question_number>/', views.phishing_clicked, name='phishing_clicked'),
