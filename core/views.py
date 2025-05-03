@@ -12,6 +12,7 @@ from django.db.models.functions import TruncDate
 from django.conf import settings
 from .models import FrequentQuestions, UserReport, UserProfile, FrequentQuestions
 from django.http import Http404
+from django.template.loader import get_template
 import plotly.graph_objs as go
 import plotly.offline as opy
 import io
@@ -19,6 +20,7 @@ from .models import HelpRequest, UserProfile
 import re
 import os
 import json
+from xhtml2pdf import pisa
 
 # List of common passwords to block (you can expand this list)
 COMMON_PASSWORDS = [
@@ -522,23 +524,27 @@ def report(request):
 @login_required
 def generate_report(request, user_profile, difficulty):
     # Query the UserReport
-    print(user_profile, difficulty)
     report = UserReport.objects.filter(user=user_profile, difficulty=difficulty).order_by('-time_stamp').first()
     # Render HTML
     if not report:
         messages.error(request, f"No reports for this difficulty. Take a {difficulty} quiz.")
         return render(request, 'dashboard/report.html')
-    
-    html_string = render_to_string('dashboard/quiz_report.html', {'report': report,
-                                                                    'score': report.score *100})
-    html = HTML(string=html_string)
+    report.difficulty = difficulty.capitalize()
+    template = get_template('dashboard/quiz_report.html')
+    html = template.render({'report': report, 'score': report.score *100})
+    result = io.BytesIO()
+    pdf_file = pisa.pisaDocument(io.BytesIO(html.encode("UTF-8")), result)
+
+    if not pdf_file.err:
+        result.seek(0)  # rewind to the beginning of the file
+    else:
+        messages.error(request, "Could not generate the report")
+        return render(request, 'dashboard/report.html')
 
     # Generate PDF
-    pdf_file = html.write_pdf()
     file_name = f'quiz_report_{difficulty}.pdf'
-    pdf_buffer = io.BytesIO(pdf_file)
     # Return PDF as response
-    return FileResponse(pdf_buffer, as_attachment=True, filename=file_name)    
+    return FileResponse(result, as_attachment=True, filename=file_name)    
 
 @login_required
 def user_settings(request):
