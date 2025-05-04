@@ -1,0 +1,12 @@
+{% block quiz %}
+<div class="quiz-phishing-sim">
+<div style="background: linear-gradient(to right, #ffe259, #ffa751); font-family: 'Comic Sans MS', cursive, sans-serif; padding: 30px;">
+    <h2 style="color: #d2691e;">🎉 Congrats! You've Been Selected for a $100 Gift Card</h2>
+    <p>You're one of our lucky winners! To claim your free $100 Amazon gift card, just verify your account within the next 30 minutes.</p>
+    <p><strong>This offer expires soon!</strong></p>
+    <a href="{% url 'phishing_clicked' question_number=question_number %}" style="background-color: #ff4500; color: white; padding: 8px 15px; text-decoration: none; border-radius: 8px; font-size: 16px;">Claim Now</a>
+    <p style="margin-top: 20px;">Cheers,<br>The Rewards Team</p>
+</div>
+</div>
+
+{% endblock  %}

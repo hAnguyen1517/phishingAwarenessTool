@@ -7,6 +7,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
+
 # Create your models here.
 class UserProfile(models.Model):
     USER_ROLES = (
@@ -25,6 +26,7 @@ class UserProfile(models.Model):
     share_score = models.BooleanField(default=False)
     share_progress = models.BooleanField(default=False)
     feedback = models.TextField(null=True, blank=True)
+    inital_quiz = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.user.username} - {self.role}"
@@ -52,6 +54,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 class UserReport(models.Model):
     DIFFICULTIES = (
+                        ('initial', "Initial"),
                         ('easy', "Easy"),
                         ('medium', 'Medium'), 
                         ('hard', 'Hard')
@@ -72,3 +75,8 @@ class UserReport(models.Model):
 class FrequentQuestions(models.Model):
     question = models.CharField(max_length=500, null=True, blank=True)
     times_asked = models.IntegerField(default=1)
+
+class InitalQuizQuestions(models.Model):
+    question = models.CharField(max_length=500, null=True, blank=True)
+    answers = models.JSONField(null=True, blank=True)
+    correct_answer = models.CharField(max_length=1, null=True, blank=True)

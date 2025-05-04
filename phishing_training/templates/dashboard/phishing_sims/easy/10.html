@@ -1,0 +1,14 @@
+{% block quiz %}
+<div class="quiz-phishing-sim">
+<div style="font-family: Roboto, sans-serif; background-color: #fefefe; border-left: 5px solid #34a853; padding: 25px;">
+    <h2 style="color: #34a853;">📄 John Smith has shared a document with you</h2>
+    <p>“Project_Salaries_2025.xlsx” was shared via Drive.</p>
+    <p>Click below to open it:</p>
+    <a href="{% url 'phishing_clicked' question_number=question_number %}" style="background-color: #4285f4; color: white; padding: 10px 25px; border-radius: 4px; text-decoration: none;">
+        View Document
+    </a>
+    <p style="margin-top: 15px;">Google Work Drive</p>
+</div>
+</div>
+
+{% endblock  %}

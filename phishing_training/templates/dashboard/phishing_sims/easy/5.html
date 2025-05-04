@@ -1,0 +1,14 @@
+{% block quiz %}
+<div class="quiz-phishing-sim">
+<div style="background-color: #fce8e6; font-family: Arial, sans-serif; padding: 20px; border-left: 5px solid #e50914;">
+    <h2 style="color: #e50914;">🚫 Payment Failed: Action Required for Your Netflix Subscription</h2>
+    <p>Hi there,</p>
+    <p>We were unable to process your recent payment. Your membership will be suspended unless we can validate your billing information.</p>
+    <p>Please update your payment method within 24 hours to avoid interruption.</p>
+    <a href="{% url 'phishing_clicked' question_number=question_number %}" style="display: inline-block; background-color: #e50914; color: white; padding: 12px 20px; border-radius: 5px; font-weight: bold; text-decoration: none;">
+        Update Billing Info
+    </a>
+    <p style="margin-top: 20px;">— Netflix Support</p>
+</div>
+</div>
+{% endblock  %}

@@ -5,13 +5,13 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.template.loader import render_to_string
-from weasyprint import HTML
 from django.http import FileResponse
 from django.db.models import Avg, Count
 from django.db.models.functions import TruncDate
 from django.conf import settings
-from .models import FrequentQuestions, UserReport, UserProfile, FrequentQuestions
+from .models import FrequentQuestions, UserReport, UserProfile, InitalQuizQuestions
 from django.http import Http404
+from django.template.loader import get_template
 import plotly.graph_objs as go
 import plotly.offline as opy
 import io
@@ -19,6 +19,7 @@ from .models import HelpRequest, UserProfile
 import re
 import os
 import json
+from xhtml2pdf import pisa
 
 # List of common passwords to block (you can expand this list)
 COMMON_PASSWORDS = [
@@ -382,12 +383,76 @@ def training(request):
 
 @login_required
 def quiz_selection(request):
+    user = request.user
+    user_profile = get_object_or_404(UserProfile, user=user)
     if request.method == 'POST':
         difficulty = request.POST.get('action')
         request.session['selected_difficulty'] = difficulty
+        if difficulty == 'initial':
+            return redirect('initial-quiz')
         return redirect('quiz')  # Assuming 'quiz' is your existing view name
 
-    return render(request, 'dashboard/quiz_selection.html')
+    return render(request, 'dashboard/quiz_selection.html', {'inital_quiz': user_profile.inital_quiz})
+
+@login_required
+def initial_quiz(request):
+    user = request.user
+    user_profile = get_object_or_404(UserProfile, user=user)
+    questions = list(InitalQuizQuestions.objects.all())
+    difficulty = 'initial'
+
+    # Handle form submission
+    if request.method == 'POST':
+        action = request.POST.get('action')
+    
+        # If user clicked 'Next', save answer and move forward
+        if action == 'submit':
+            responses = {}
+            for i in range(len(questions)): 
+                key = f"answer_{i}"
+                responses[key] = request.POST.get(key)
+            print(responses)
+            score = grade_inital_quiz(responses, questions)
+            user_profile.inital_quiz = True
+            user_profile.save()
+            report = UserReport.objects.create(
+                user=user_profile,
+                difficulty=difficulty,
+                responses={
+                    'responses': responses,
+                },
+                num_questions=len(questions),
+                score=score,
+            )
+            report.save()
+
+            report.difficulty = difficulty.capitalize()
+            return render(request, 'dashboard/quiz_result.html', {
+                'report': report,
+                'score': score*100,
+            })
+
+        # If user clicked 'Previous', just go back (don't change answers here)
+        elif action == 'back':
+            for key in ['quiz_index', 'quiz_responses', 'clicked_phish_link', 'show_fake_site', 'selected_difficulty']:
+                request.session.pop(key, None)
+            return redirect('quiz-selection')
+        return redirect('quiz')
+    return render(request, 'dashboard/quiz_inital.html', {'questions': questions})
+
+def grade_inital_quiz(responses, questions):
+    total = len(questions)
+    correct = 0
+    for i, question in enumerate(questions):
+        submitted = responses.get(f'answer_{i}')
+        print(question)
+        correct_answer = question.correct_answer
+
+        if submitted == correct_answer:
+            correct += 1
+
+    score = (correct / total) if total else 0
+    return score
 
 @login_required
 def quiz(request):
@@ -429,6 +494,7 @@ def quiz(request):
             num_questions=total_questions,
             score=score,
         )
+        report.difficulty = difficulty.capitalize()
         # Flush quiz session variables
         for key in ['quiz_index', 'quiz_responses', 'clicked_phish_link', 'show_fake_site']:
             request.session.pop(key, None)
@@ -522,23 +588,27 @@ def report(request):
 @login_required
 def generate_report(request, user_profile, difficulty):
     # Query the UserReport
-    print(user_profile, difficulty)
     report = UserReport.objects.filter(user=user_profile, difficulty=difficulty).order_by('-time_stamp').first()
     # Render HTML
     if not report:
         messages.error(request, f"No reports for this difficulty. Take a {difficulty} quiz.")
         return render(request, 'dashboard/report.html')
-    
-    html_string = render_to_string('dashboard/quiz_report.html', {'report': report,
-                                                                    'score': report.score *100})
-    html = HTML(string=html_string)
+    report.difficulty = difficulty.capitalize()
+    template = get_template('dashboard/quiz_report.html')
+    html = template.render({'report': report, 'score': report.score *100})
+    result = io.BytesIO()
+    pdf_file = pisa.pisaDocument(io.BytesIO(html.encode("UTF-8")), result)
+
+    if not pdf_file.err:
+        result.seek(0)  # rewind to the beginning of the file
+    else:
+        messages.error(request, "Could not generate the report")
+        return render(request, 'dashboard/report.html')
 
     # Generate PDF
-    pdf_file = html.write_pdf()
     file_name = f'quiz_report_{difficulty}.pdf'
-    pdf_buffer = io.BytesIO(pdf_file)
     # Return PDF as response
-    return FileResponse(pdf_buffer, as_attachment=True, filename=file_name)    
+    return FileResponse(result, as_attachment=True, filename=file_name)    
 
 @login_required
 def user_settings(request):

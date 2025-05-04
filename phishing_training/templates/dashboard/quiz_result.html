@@ -7,22 +7,26 @@
     <link rel="stylesheet" href="{% static 'css/quiz.css' %}">
 {% endblock %}
 
-{% block page_title %}{{ difficulty }} Quiz{% endblock %}
+{% block page_title %}{{ report.difficulty }} Quiz{% endblock %}
 {% block content %}
 <form class="quiz-form" method="post">
   {% csrf_token %}
   <button type="submit" name="action" value="back" class="back-button">All Quizes</button>    
 </form>
+<div class="result-card">
 <h2>Quiz Complete</h2>
 <p><strong>Score:</strong> {{ score|floatformat:0 }}%</p>
 <p>You answered {{ report.responses.responses|length }} questions.</p>
 
+{% if report.difficulty != "Initial"%}
 <ul>
   {% for answer in report.responses.responses %}
     <li>Question {{ forloop.counter }}: {{ answer }}</li>
   {% endfor %}
 </ul>
+{% endif %}
 
+{% if report.difficulty != "Initial"%}
 <h3>Phishing Links Clicked:</h3>
 <ul>
   {% for q in report.responses.clicked_links %}
@@ -31,4 +35,6 @@
     <li>No phishing links clicked 🎉</li>
   {% endfor %}
 </ul>
+{% endif %}
+</div>
 {% endblock %}

@@ -1,93 +1,17 @@
 {% block quiz %}
-<div class="fake-site-container">
-    <div class="fake-login-box">
-        <h2>Account Verification</h2>
-        <p>We noticed a login attempt from an unrecognized device. Please sign in to confirm it was you.</p>
-        
-        <form class="fake-site-form">
-            <label for="email">Email Address</label>
-            <input type="text" id="email" name="email" placeholder="you@example.com">
-
+<div class="quiz-phishing-sim">
+<div style="background-color: #f8f8f8; display: flex; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, sans-serif;">
+    <div style="background-color: white; padding: 40px; border-radius: 10px; box-shadow: 0 0 15px rgba(0,0,0,0.1); width: 350px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Logo" style="width: 40px; margin-bottom: 20px;">
+        <h2 style="font-size: 20px; color: #333;">Apple ID</h2>
+        <form>
+            <label for="apple-id">Enter Apple ID Now</label>
+            <input id="apple-id" type="text" placeholder="example@icloud.com" style="width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px;">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password">
-
-            <button type="submit">Verify</button>
+            <input id="password" type="password" placeholder="Password" style="width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px;">
+            <button type="submit" style="width: 100%; padding: 10px; background-color: black; color: white; border: none; border-radius: 5px; font-weight: bold;">Continue</button>
         </form>
-        
-        <p class="footer-note">© 2025 SecureAccess Inc.</p>
     </div>
 </div>
-
-<style>
-.fake-site-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 50px 20px;
-    background-color: #f4f6f8;
-    border: 1px solid #ddd;
-    margin-bottom: 20px;
-}
-
-.fake-login-box {
-    background-color: white;
-    border-radius: 10px;
-    padding: 30px;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    font-family: Arial, sans-serif;
-}
-
-.fake-login-box h2 {
-    color: #333;
-    margin-bottom: 15px;
-}
-
-.fake-login-box p {
-    font-size: 14px;
-    color: #555;
-}
-
-.fake-login-box form {
-    margin-top: 15px;
-}
-
-.fake-login-box label {
-    display: block;
-    margin-bottom: 5px;
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-.fake-login-box input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.fake-login-box button {
-    margin-top: 20px;
-    background-color: #d9534f;
-    color: white;
-    border: none;
-    padding: 10px 0;
-    width: 100%;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.fake-login-box button:hover {
-    background-color: #c9302c;
-}
-
-.footer-note {
-    margin-top: 20px;
-    font-size: 12px;
-    color: #999;
-    text-align: center;
-}
-</style>
+</div>
 {% endblock %}

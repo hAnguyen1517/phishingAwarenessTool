@@ -1,0 +1,32 @@
+{% extends 'dashboard/dashboard_base.html' %}
+{% load static %}
+
+{% block title %}{{ difficulty }} Quiz - Phishing Training{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/quiz.css' %}">
+{% endblock %}
+
+{% block page_title %}Initial Quiz{% endblock %}
+
+{% block content %}
+    <form class="quiz-form" method="post">
+        {% csrf_token %}
+        {% for question in questions %}
+            <div class="quiz-question">
+                <p>{{ forloop.counter }}. {{ question.question }}</p>
+                {% for key, answer in question.answers.items %}
+                <label>
+                    <input type="radio" name="answer_{{ forloop.parentloop.counter0 }}" value="{{ key }}">{{ answer }}
+                </label>
+                <br >
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+            <div class="next-prev-buttons">
+                <button type="submit" name="action" value="back">Back</a>
+                <button type="submit" name="action" value="submit">Submit</a>
+            </div>
+    </form>
+{% endblock %}

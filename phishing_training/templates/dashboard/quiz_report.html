@@ -1,29 +1,100 @@
 {% load static %}
 
-{% block title %}{{ difficulty }} Quiz - Phishing Training{% endblock %}
+{% block title %}{{ difficulty }} Quiz Report{% endblock %}
 
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/quiz.css' %}">
-{% endblock %}
-
-{% block page_title %}{{ difficulty }} Quiz{% endblock %}
 {% block content %}
-<h2>Quiz Complete</h2>
-<p><strong>Score:</strong> {{ score|floatformat:0 }}%</p>
-<p>You answered {{ report.responses.responses|length }} questions.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page {
+            margin: 1in;
+        }
+        body {
+            font-family: 'Roboto', sans-serif !important;
+            font-size: 12pt;
+            line-height: 1.6;
+            color: #000;
+            background: #fff;
+        }
 
-<ul>
-  {% for answer in report.responses.responses %}
-    <li>Question {{ forloop.counter }}: {{ answer }}</li>
-  {% endfor %}
-</ul>
+        .report-container {
+            width: 100%;
+        }
 
-<h3>Phishing Links Clicked:</h3>
-<ul>
-  {% for q in report.responses.clicked_links %}
-    <li>Question {{ q }}</li>
-  {% empty %}
-    <li>No phishing links clicked 🎉</li>
-  {% endfor %}
-</ul>
+        h1, h2, h3 {
+            text-align: center;
+            margin: 0.5em 0;
+        }
+
+        h1 {
+            font-size: 20pt;
+            border-bottom: 1px solid #000;
+            padding-bottom: 0.3em;
+        }
+
+        h2 {
+            font-size: 16pt;
+        }
+
+        h3 {
+            font-size: 14pt;
+            margin-top: 1.5em;
+            border-bottom: 1px solid #aaa;
+            padding-bottom: 0.2em;
+        }
+
+        p {
+            margin: 0.5em 0;
+        }
+
+        ul {
+            margin-left: 1.2em;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 0.3em;
+        }
+
+        .no-clicks {
+            color: green;
+            font-weight: bold;
+        }
+
+        .score {
+            font-size: 14pt;
+            font-weight: bold;
+            margin: 1em 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="result-card">
+    <div class="report-container">
+        <h1>{{ report.difficulty }} Quiz Report</h1>
+        <p class="score">Final Score: {{ score|floatformat:0 }}%</p>
+        <p>Total Questions Answered: {{ report.responses.responses|length }}</p>
+
+        {% if report.difficulty != "Initial"%}
+        <h3>Your Answers</h3>
+        <ul>
+            {% for answer in report.responses.responses %}
+                <li>Question {{ forloop.counter }}: {{ answer }}</li>
+            {% endfor %}
+        </ul>
+        <h3>Phishing Links Clicked</h3>
+        <ul>
+            {% for q in report.responses.clicked_links %}
+                <li>Question {{ q }}</li>
+            {% empty %}
+                <li class="no-clicks">No phishing links clicked</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>
 {% endblock %}
