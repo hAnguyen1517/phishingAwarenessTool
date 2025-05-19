@@ -12,6 +12,15 @@ document.querySelectorAll('form').forEach(form => {
     });
 });
 
+// // Form submission handling (for sign-up and sign-in)
+// document.querySelectorAll('form').forEach(form => {
+//     form.addEventListener('submit', (e) => {
+//         e.preventDefault();
+//         alert('Form submitted!');
+//         // Add API integration logic here
+//     });
+// });
+
 // Sidebar navigation
 document.querySelectorAll('.sidebar ul li a').forEach(link => {
     link.addEventListener('click', () => {

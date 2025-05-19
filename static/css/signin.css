@@ -73,6 +73,33 @@ form {
   color: var(--text-secondary);
 }
 
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 40px; /* Make space for the icon */
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+
+.password-toggle svg {
+  display: block;
+}
+
+.eye-off-icon.hidden,
+.eye-icon.hidden {
+  display: none;
+}
+
+
 .signin-btn {
   background-color: var(--accent-purple);
   color: var(--white);
