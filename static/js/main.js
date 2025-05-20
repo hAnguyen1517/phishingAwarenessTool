@@ -12,14 +12,24 @@ document.querySelectorAll('form').forEach(form => {
     });
 });
 
-// // Form submission handling (for sign-up and sign-in)
-// document.querySelectorAll('form').forEach(form => {
-//     form.addEventListener('submit', (e) => {
-//         e.preventDefault();
-//         alert('Form submitted!');
-//         // Add API integration logic here
-//     });
-// });
+// Password visibility toggle
+document.querySelectorAll('.password-toggle').forEach(toggle => {
+    toggle.addEventListener('click', () => {
+        const input = toggle.previousElementSibling; // The password input
+        const eyeIcon = toggle.querySelector('.eye-icon');
+        const eyeOffIcon = toggle.querySelector('.eye-off-icon');
+
+        if (input.type === 'password') {
+            input.type = 'text';
+            eyeIcon.classList.add('hidden');
+            eyeOffIcon.classList.remove('hidden');
+        } else {
+            input.type = 'password';
+            eyeIcon.classList.remove('hidden');
+            eyeOffIcon.classList.add('hidden');
+        }
+    });
+});
 
 // Sidebar navigation
 document.querySelectorAll('.sidebar ul li a').forEach(link => {
